@@ -1,69 +1,79 @@
-*/*Чтобы не было дефолтных отступов*/{
-    margin: 0;
-    padding: 0;
+*/*Чтобы не было дефолтных отступов*/ {
+  margin: 0;
+  padding: 0;
 }
-@font-face /*Oswald-Bold*/{
-    font-family: "Oswald-Bold";
-    src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
+@font-face /*Oswald-Bold*/ {
+  font-family: "Oswald-Bold";
+  src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
 }
-@font-face /*Roboto-Regular*/{
-    font-family: "Roboto-Regular";
-    src: url(../fonts/Roboto/Roboto-Regular.ttf);
+@font-face /*Roboto-Regular*/ {
+  font-family: "Roboto-Regular";
+  src: url(../fonts/Roboto/Roboto-Regular.ttf);
 }
-body{
-    background-image: url(../images/Background/BlackWall.jpg);
-    background-repeat: no-repeat;/*Чтобы картинка не повторялась*/
-    background-size: cover;/*Чтобы оно полностью покрывало задний фон элемента*/
+body {
+  background-image: url(../images/Background/BlackWall.jpg);
+  background-repeat: no-repeat; /*Чтобы картинка не повторялась*/
+  background-size: cover; /*Чтобы оно полностью покрывало задний фон элемента*/
 }
-a{
-    color: initial;/*Даёт возможность дать тот цвет, который ты хочешь*/
-    text-decoration: none;/*Убирает подчеркивания у ссылок*/
+a {
+  color: initial; /*Даёт возможность дать тот цвет, который ты хочешь*/
+  text-decoration: none; /*Убирает подчеркивания у ссылок*/
 }
-a:link/*Ссылка обычная*/{
-    color: #565656;
-    transition-duration: 0.3s;/*Время плавного переключения цвета*/
+a:link/*Ссылка обычная*/ {
+  color: #565656;
+  transition-duration: 0.3s; /*Время плавного переключения цвета*/
 }
-a:visited/*Ссылка посещёння*/{
-    color: #565656;
+a:visited/*Ссылка посещёння*/ {
+  color: #565656;
 }
-a:hover/*Ссылка при наведении*/{
-    color: #ffffff;
-    transition-duration: 0.3s;/*Время плавного переключения цвета*/
+a:hover/*Ссылка при наведении*/ {
+  color: #ffffff;
+  transition-duration: 0.3s; /*Время плавного переключения цвета*/
 }
-ul{
-    list-style-type: none;/*Убирает у списка точки слева*/
+ul {
+  list-style-type: none; /*Убирает у списка точки слева*/
 }
-li{
-    display: inline;/*Список в горизонтальном положении*/
-    padding: 25px;
+li {
+  display: inline; /*Список в горизонтальном положении*/
+  padding: 25px;
 }
-.main{
-    background-color: rgb(30, 30, 30);
+.main {
+  background-color: rgb(30, 30, 30);
 }
-.mainLogo{
-    font-family: Oswald-Bold;
-    color: whitesmoke;
-    text-align: center;
-    font-size: 700%;
-    padding: 20px;
+.mainLogo {
+  font-family: Oswald-Bold;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 700%;
+  padding: 20px;
 }
-.mainMenu{
-    font-family: Roboto-Regular;
-    text-align: center;
-    font-size: 140%;
-    margin: 20px;
+.mainMenu {
+  font-family: Roboto-Regular;
+  text-align: center;
+  font-size: 140%;
+  margin: 20px;
 }
-.Introduction{
-    font-family: Oswald-Bold;
+.Introduction {
+  font-family: Oswald-Bold;
 }
-.content{
-    margin-left: 13%;
-    margin-right: 13%;
+.IntroText{
+  font-family: Roboto-Regular;
 }
-.IntroImage{
-    margin: 0;
-    padding: 0;
+.IntroImage {
+  margin: 0;
+  padding: 0;
 }
-.contentBox h2{
-    font-family: Oswald-Bold;
-}/*В content надо сделать отступы по бокам и нормально определить элементы контента*/
+.content {
+  margin-left: 13%;
+  margin-right: 13%;
+}
+.contentBox h2 {
+  font-family: Oswald-Bold;
+  color: #d1ac4d;
+  size: 100px;
+} /*В content надо сделать отступы по бокам и нормально определить элементы контента*/
+.contentText {
+  font-family: Roboto-Regular;
+  color: #ffffff;
+  size: 40px;
+}
