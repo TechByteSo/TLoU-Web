@@ -1,49 +1,86 @@
-*/*Чтобы не было дефолтных отступов*/ {
+*
+
+/*Чтобы не было дефолтных отступов*/
+  {
   margin: 0;
   padding: 0;
 }
-@font-face /*Oswald-Bold*/ {
+
+@font-face
+
+/*Oswald-Bold*/
+  {
   font-family: "Oswald-Bold";
   src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
 }
-@font-face /*Roboto-Regular*/ {
+
+@font-face
+
+/*Roboto-Regular*/
+  {
   font-family: "Roboto-Regular";
   src: url(../fonts/Roboto/Roboto-Regular.ttf);
 }
+
 body {
   background-image: url(../images/Background/BlackWall.jpg);
-  background-repeat: no-repeat; /*Чтобы картинка не повторялась*/
-  background-size: cover; /*Чтобы оно полностью покрывало задний фон элемента*/
+  background-repeat: no-repeat;
+  /*Чтобы картинка не повторялась*/
+  background-size: cover;
+  /*Чтобы оно полностью покрывало задний фон элемента*/
 }
+
 a {
-  color: initial; /*Даёт возможность дать тот цвет, который ты хочешь*/
-  text-decoration: none; /*Убирает подчеркивания у ссылок*/
+  color: initial;
+  /*Даёт возможность дать тот цвет, который ты хочешь*/
+  text-decoration: none;
+  /*Убирает подчеркивания у ссылок*/
 }
-a:link/*Ссылка обычная*/ {
+
+a:link
+
+/*Ссылка обычная*/
+  {
   color: #565656;
-  transition-duration: 0.3s; /*Время плавного переключения цвета*/
+  transition-duration: 0.3s;
+  /*Время плавного переключения цвета*/
 }
-a:visited/*Ссылка посещёння*/ {
+
+a:visited
+
+/*Ссылка посещёння*/
+  {
   color: #565656;
 }
-a:hover/*Ссылка при наведении*/ {
+
+a:hover
+
+/*Ссылка при наведении*/
+  {
   color: #ffffff;
-  transition-duration: 0.3s; /*Время плавного переключения цвета*/
+  transition-duration: 0.3s;
+  /*Время плавного переключения цвета*/
 }
+
 ul {
-  list-style-type: none; /*Убирает у списка точки слева*/
+  list-style-type: none;
+  /*Убирает у списка точки слева*/
 }
+
 li {
-  display: inline; /*Список в горизонтальном положении*/
+  display: inline;
+  /*Список в горизонтальном положении*/
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 10px;
   margin-top: 10px;
 }
+
 .main {
   background-color: rgb(30, 30, 30);
   padding-bottom: 10px;
 }
+
 .mainLogo {
   font-family: Oswald-Bold;
   color: whitesmoke;
@@ -51,12 +88,14 @@ li {
   font-size: 700%;
   padding: 20px;
 }
+
 .mainMenu {
   font-family: Roboto-Regular;
   text-align: center;
   font-size: 140%;
   margin: 20px;
 }
+
 .intro {
   margin: 0;
   padding: 0;
@@ -65,40 +104,47 @@ li {
   background-size: 100%;
   padding-bottom: 2.7%;
 }
+
 .Introduction {
   font-family: Oswald-Bold;
   color: #ffffff;
   margin-left: 13%;
   margin-right: 45%;
   margin-bottom: 3%;
-  padding-top:40px;
+  padding-top: 40px;
   font-size: 300%;
 }
+
 .IntroText {
   font-family: Roboto-Regular;
   color: #ffffff;
   margin-left: 13%;
   margin-right: 60%;
-  padding-top:10px;
+  padding-top: 10px;
   font-size: 150%;
 }
+
 .content {
   margin-top: 1.7%;
   margin-left: 13%;
   margin-right: 13%;
   margin-bottom: 2%;
 }
-.contentBox{
+
+.contentBox {
   margin-bottom: 20px;
 }
+
 .contentBox h2 {
   font-family: Oswald-Bold;
   color: #d1ac4d;
   size: 100px;
 }
-.contentBox img{
-  margin: 0;
+
+.contentBox img {
+  height: 260px;
 }
+
 .contentBox p {
   font-family: Roboto-Regular;
   color: #ffffff;
