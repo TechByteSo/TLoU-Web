@@ -101,6 +101,7 @@ li {
   padding: 0;
   background-image: url(../images/Background/TLoU\ P1\ v2.jpg);
   background-position: top;
+  background-repeat: no-repeat;
   background-size: 100%;
   padding-bottom: 2.7%;
 }
@@ -131,22 +132,49 @@ li {
   margin-bottom: 2%;
 }
 
-.contentBox {
+.contentBoxLeft {
   margin-bottom: 20px;
 }
 
-.contentBox h2 {
+.contentBoxLeft h2 {
   font-family: Oswald-Bold;
   color: #d1ac4d;
   size: 100px;
 }
 
-.contentBox img {
-  height: 260px;
+.contentBoxLeft img {
+  height: 300px;
+  float: left;
+  margin: 7px;
 }
 
-.contentBox p {
+.contentBoxLeft p {
   font-family: Roboto-Regular;
   color: #ffffff;
   size: 60px;
+  float: right;
+  margin: 3px;
+}
+
+.contentBoxRight {
+  margin-bottom: 20px;
+}
+
+.contentBoxRight h2 {
+  font-family: Oswald-Bold;
+  color: #d1ac4d;
+  size: 100px;
+}
+
+.contentBoxRight img {
+  height: 300px;
+  float: right;
+  margin: 7px;
+}
+
+.contentBoxRight p {
+  font-family: Roboto-Regular;
+  color: #ffffff;
+  size: 60px;
+  float: left;
 }
