@@ -1,0 +1,71 @@
+.intro {
+    margin: 0;
+    padding: 0;
+    background-image: url(../images/Background/TLoU\ P1\ v2.jpg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-bottom: 2.7%;
+  }
+  
+  .Introduction {
+    font-family: Oswald-Bold;
+    color: #ffffff;
+    margin-left: 13%;
+    margin-right: 45%;
+    margin-bottom: 3%;
+    padding-top: 40px;
+    font-size: 300%;
+  }
+  
+  .IntroText {
+    font-family: Roboto-Regular;
+    color: #ffffff;
+    margin-left: 13%;
+    margin-right: 60%;
+    padding-top: 10px;
+    font-size: 150%;
+  }
+  /*Контент Л*/
+  .containerL {
+    margin-left: 13%;
+    margin-right: 13%;
+    padding-top: 25px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+  .containerL h2 {
+    color: #ffd060;
+  }
+  .imageL {
+    width: 600px;
+    height: auto;
+    margin-right: 20px;
+  }
+  .textL {
+    font-size: 120%;
+    font-family: Roboto-Regular;
+    color: #ffffff;
+  }
+  /*Контент Р*/
+  .containerR {
+    margin-left: 13%;
+    margin-right: 13%;
+    padding-top: 25px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+  .containerR h2 {
+    color: #ffd060;
+  }
+  .imageR {
+    width: 600px;
+    height: auto;
+    margin-left: 20px;
+  }
+  .textR {
+    font-size: 120%;
+    font-family: Roboto-Regular;
+    color: #ffffff;
+  } /*ДОБАВИТЬ ПЛАВНОЕ ПОЯВЛЕНИЕ КОНТЕНТА*/
+  

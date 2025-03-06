@@ -1,25 +1,21 @@
-*
-
-/*Чтобы не было дефолтных отступов*/
-  {
+* /*Чтобы не было дефолтных отступов от браузеров*/ {
   margin: 0;
   padding: 0;
 }
 
-@font-face
-
-/*Oswald-Bold*/
-  {
+@font-face /*Oswald-Bold*/ {
   font-family: "Oswald-Bold";
   src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
 }
 
-@font-face
-
-/*Roboto-Regular*/
-  {
+@font-face /*Roboto-Regular*/ {
   font-family: "Roboto-Regular";
   src: url(../fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face /*The Last Of Us*/ {
+  font-family: "The Last Of Us";
+  src: url(../fonts/the-last-of-us/The\ Last\ Of\ Us.ttf);
 }
 
 body {
@@ -39,8 +35,7 @@ a {
 
 a:link
 
-/*Ссылка обычная*/
-  {
+/*Ссылка обычная*/ {
   color: #565656;
   transition-duration: 0.3s;
   /*Время плавного переключения цвета*/
@@ -48,15 +43,13 @@ a:link
 
 a:visited
 
-/*Ссылка посещёння*/
-  {
+/*Ссылка посещёння*/ {
   color: #565656;
 }
 
 a:hover
 
-/*Ссылка при наведении*/
-  {
+/*Ссылка при наведении*/ {
   color: #ffffff;
   transition-duration: 0.3s;
   /*Время плавного переключения цвета*/
@@ -77,12 +70,12 @@ li {
 }
 
 .main {
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(25, 25, 25);
   padding-bottom: 10px;
 }
 
 .mainLogo {
-  font-family: Oswald-Bold;
+  font-family: The Last of Us;
   color: whitesmoke;
   text-align: center;
   font-size: 700%;
@@ -94,87 +87,4 @@ li {
   text-align: center;
   font-size: 140%;
   margin: 20px;
-}
-
-.intro {
-  margin: 0;
-  padding: 0;
-  background-image: url(../images/Background/TLoU\ P1\ v2.jpg);
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  padding-bottom: 2.7%;
-}
-
-.Introduction {
-  font-family: Oswald-Bold;
-  color: #ffffff;
-  margin-left: 13%;
-  margin-right: 45%;
-  margin-bottom: 3%;
-  padding-top: 40px;
-  font-size: 300%;
-}
-
-.IntroText {
-  font-family: Roboto-Regular;
-  color: #ffffff;
-  margin-left: 13%;
-  margin-right: 60%;
-  padding-top: 10px;
-  font-size: 150%;
-}
-
-.content {
-  margin-top: 1.7%;
-  margin-left: 13%;
-  margin-right: 13%;
-  margin-bottom: 2%;
-}
-
-.contentBoxLeft {
-  margin-bottom: 20px;
-}
-
-.contentBoxLeft h2 {
-  font-family: Oswald-Bold;
-  color: #d1ac4d;
-  size: 100px;
-}
-
-.contentBoxLeft img {
-  height: 300px;
-  float: left;
-  margin: 7px;
-}
-
-.contentBoxLeft p {
-  font-family: Roboto-Regular;
-  color: #ffffff;
-  size: 60px;
-  float: right;
-  margin: 3px;
-}
-
-.contentBoxRight {
-  margin-bottom: 20px;
-}
-
-.contentBoxRight h2 {
-  font-family: Oswald-Bold;
-  color: #d1ac4d;
-  size: 100px;
-}
-
-.contentBoxRight img {
-  height: 300px;
-  float: right;
-  margin: 7px;
-}
-
-.contentBoxRight p {
-  font-family: Roboto-Regular;
-  color: #ffffff;
-  size: 60px;
-  float: left;
 }
