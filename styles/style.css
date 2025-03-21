@@ -88,3 +88,29 @@ li {
   font-size: 140%;
   margin: 20px;
 }
+
+footer {
+  background-color:rgb(25, 25, 25);
+  color: #ffffff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer p{
+  color:#ffffff;
+  font-family: Oswald-Bold;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  padding-left: 20px; /* Смещаем список левее, добавляя отступ слева */
+  font-family: Roboto-Regular;
+}
