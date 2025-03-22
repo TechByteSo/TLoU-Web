@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+html{
+  scroll-behavior: smooth; /*Для плавного перемещения наверх*/
+}
+
 @font-face /*Oswald-Bold*/ {
   font-family: "Oswald-Bold";
   src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
@@ -87,6 +91,41 @@ li {
   text-align: center;
   font-size: 140%;
   margin: 20px;
+}
+
+#scrollToTopBtn {
+  display: none; /* Скрыть кнопку по умолчанию */
+  position: fixed; /* Фиксированное положение */
+  bottom: 95px; /* Отступ снизу */
+  left: 30px; /* Отступ слева */
+  z-index: 99; /* Чтобы кнопка была поверх других элементов */
+  border: none; /* Убрать границу */
+  outline: none; /* Убрать контур */
+  background-color: rgb(25, 25, 25); /* Цвет фона */
+  color: #ffffff; /* Цвет текста */
+  cursor: pointer; /* Изменить курсор при наведении */
+  padding: 15px; /* Внутренний отступ */
+  border-radius: 50%; /* Сделать кнопку круглой */
+  font-size: 18px; /* Размер текста */
+  width: 50px; /* Ширина кнопки */
+  height: 50px; /* Высота кнопки */
+  display: flex; /* Для центрирования стрелки */
+  align-items: center; /* Вертикальное центрирование */
+  justify-content: center; /* Горизонтальное центрирование */
+  transition: background-color 0.3s; /* Плавное изменение цвета */
+}
+
+#scrollToTopBtn:hover {
+  background-color: #ffd060; /* Цвет фона при наведении */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#scrollToTopBtn {
+  animation: fadeIn 0.6s ease-in-out;
 }
 
 footer {
