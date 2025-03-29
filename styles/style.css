@@ -1,72 +1,58 @@
-* /*Чтобы не было дефолтных отступов от браузеров*/ {
+* {/*Чтобы не было дефолтных отступов от браузеров*/
   margin: 0;
   padding: 0;
 }
 
-html{
+html {
   scroll-behavior: smooth; /*Для плавного перемещения наверх*/
 }
 
-@font-face /*Oswald-Bold*/ {
+@font-face {/*Oswald-Bold*/
   font-family: "Oswald-Bold";
   src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
 }
 
-@font-face /*Roboto-Regular*/ {
+@font-face {/*Roboto-Regular*/
   font-family: "Roboto-Regular";
   src: url(../fonts/Roboto/Roboto-Regular.ttf);
 }
 
-@font-face /*The Last Of Us*/ {
+@font-face {/*The Last Of Us*/
   font-family: "The Last Of Us";
   src: url(../fonts/the-last-of-us/The\ Last\ Of\ Us.ttf);
 }
 
 body {
   background-image: url(../images/Background/BlackWall.jpg);
-  background-repeat: no-repeat;
-  /*Чтобы картинка не повторялась*/
-  background-size: cover;
-  /*Чтобы оно полностью покрывало задний фон элемента*/
+  background-repeat: no-repeat;/*Чтобы картинка не повторялась*/
+  background-size: cover;/*Чтобы оно полностью покрывало задний фон элемента*/
 }
 
 a {
-  color: initial;
-  /*Даёт возможность дать тот цвет, который ты хочешь*/
-  text-decoration: none;
-  /*Убирает подчеркивания у ссылок*/
+  color: initial;/*Даёт возможность дать тот цвет, который ты хочешь*/
+  text-decoration: none;/*Убирает подчеркивания у ссылок*/
 }
 
-a:link
-
-/*Ссылка обычная*/ {
+a:link {/*Ссылка обычная*/
   color: #565656;
-  transition-duration: 0.3s;
-  /*Время плавного переключения цвета*/
+  transition-duration: 0.3s;/*Время плавного переключения цвета*/
 }
 
-a:visited
-
-/*Ссылка посещёння*/ {
+a:visited {/*Ссылка посещёння*/ 
   color: #565656;
 }
 
-a:hover
-
-/*Ссылка при наведении*/ {
+a:hover {/*Ссылка при наведении*/ 
   color: #ffffff;
-  transition-duration: 0.3s;
-  /*Время плавного переключения цвета*/
+  transition-duration: 0.3s;/*Время плавного переключения цвета*/
 }
 
 ul {
-  list-style-type: none;
-  /*Убирает у списка точки слева*/
+  list-style-type: none;/*Убирает у списка точки слева*/
 }
 
 li {
-  display: inline;
-  /*Список в горизонтальном положении*/
+  display: inline;/*Список в горизонтальном положении*/
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 10px;
@@ -75,7 +61,7 @@ li {
 
 .main {
   background-color: rgb(25, 25, 25);
-  padding-bottom: 10px;
+  padding-bottom: 10px; /*Внутренний отступ снизу элемента*/
 }
 
 .mainLogo {
@@ -119,13 +105,13 @@ li {
   background-color: #ffd060; /* Цвет фона при наведении */
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes fadeIn { /*Правило CSS и название анимации*/
+  from { opacity: 0; } /*Начальное состояние анимации(0%)*/
+  to { opacity: 1; } /*Конечное состояние анимации (100%)*/
 }
 
-#scrollToTopBtn {
-  animation: fadeIn 0.6s ease-in-out;
+#scrollToTopBtn { /*Стиль для кнопки Наверх*/
+  animation: fadeIn 0.6s ease-in-out; /*Скорость появление и плавность*/
 }
 
 footer {
@@ -140,13 +126,13 @@ footer p{
   font-family: Roboto-Regular;
 }
 
-.footer-content {
+.footer-content { /*Сам размер блока*/
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-.footer-links {
+.footer-links { /*Кнопки и футтере*/
   list-style: none;
   padding: 0;
   margin: 10px 0 0;
