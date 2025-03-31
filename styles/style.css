@@ -1,141 +1,168 @@
-* {/*Чтобы не было дефолтных отступов от браузеров*/
-  margin: 0;
-  padding: 0;
+/* Обнуление дефолтных отступов у всех элементов */
+* {
+  margin: 0; /* Убирает внешние отступы */
+  padding: 0; /* Убирает внутренние отступы */
 }
 
+/* Настройки корневого элемента */
 html {
-  scroll-behavior: smooth; /*Для плавного перемещения наверх*/
+  scroll-behavior: smooth; /* Плавная прокрутка страницы */
 }
 
-@font-face {/*Oswald-Bold*/
-  font-family: "Oswald-Bold";
-  src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
+/* Подключение шрифта Oswald-Bold */
+@font-face {
+  font-family: "Oswald-Bold"; /* Название шрифта */
+  src: url(../fonts/Oswald/static/Oswald-Bold.ttf); /* Путь к файлу шрифта */
 }
 
-@font-face {/*Roboto-Regular*/
-  font-family: "Roboto-Regular";
-  src: url(../fonts/Roboto/Roboto-Regular.ttf);
+/* Подключение шрифта Roboto-Regular */
+@font-face {
+  font-family: "Roboto-Regular"; /* Название шрифта */
+  src: url(../fonts/Roboto/Roboto-Regular.ttf); /* Путь к файлу шрифта */
 }
 
-@font-face {/*The Last Of Us*/
-  font-family: "The Last Of Us";
-  src: url(../fonts/the-last-of-us/The\ Last\ Of\ Us.ttf);
+/* Подключение кастомного шрифта */
+@font-face {
+  font-family: "The Last Of Us"; /* Название шрифта */
+  src: url(../fonts/the-last-of-us/The\ Last\ Of\ Us.ttf); /* Путь к файлу шрифта */
 }
 
+/* Основные стили страницы */
 body {
-  background-image: url(../images/Background/BlackWall.jpg);
-  background-repeat: no-repeat;/*Чтобы картинка не повторялась*/
-  background-size: cover;/*Чтобы оно полностью покрывало задний фон элемента*/
+  background-image: url(../images/Background/BlackWall.jpg); /* Фоновое изображение */
+  background-repeat: no-repeat; /* Запрет повторения фона */
+  background-size: cover; /* Растягивание на весь экран */
 }
 
+/* Базовые стили для всех ссылок */
 a {
-  color: initial;/*Даёт возможность дать тот цвет, который ты хочешь*/
-  text-decoration: none;/*Убирает подчеркивания у ссылок*/
+  color: initial; /* Возврат к исходному цвету */
+  text-decoration: none; /* Удаление подчеркивания */
 }
 
-a:link {/*Ссылка обычная*/
-  color: #565656;
-  transition-duration: 0.3s;/*Время плавного переключения цвета*/
+/* Непосещенные ссылки */
+a:link {
+  color: #565656; /* Темно-серый цвет */
+  transition-duration: 0.3s; /* Длительность анимации */
 }
 
-a:visited {/*Ссылка посещёння*/ 
-  color: #565656;
+/* Посещенные ссылки */
+a:visited {
+  color: #565656; /* Темно-серый цвет */
 }
 
-a:hover {/*Ссылка при наведении*/ 
-  color: #ffffff;
-  transition-duration: 0.3s;/*Время плавного переключения цвета*/
+/* Состояние при наведении */
+a:hover {
+  color: #ffffff; /* Белый цвет */
+  transition-duration: 0.3s; /* Длительность анимации */
 }
 
+/* Стилизация списков */
 ul {
-  list-style-type: none;/*Убирает у списка точки слева*/
+  list-style-type: none; /* Удаление маркеров списка */
 }
 
+/* Элементы списка */
 li {
-  display: inline;/*Список в горизонтальном положении*/
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 10px;
-  margin-top: 10px;
+  display: inline; /* Горизонтальное расположение */
+  padding-left: 25px; /* Отступ слева */
+  padding-right: 25px; /* Отступ справа */
+  padding-bottom: 10px; /* Отступ снизу */
+  margin-top: 10px; /* Отступ сверху */
 }
 
+/* Основной контент */
 .main {
-  background-color: rgb(25, 25, 25);
-  padding-bottom: 10px; /*Внутренний отступ снизу элемента*/
+  background-color: rgb(25, 25, 25); /* Темный фон */
+  padding-bottom: 10px; /* Отступ снизу */
 }
 
+/* Логотип */
 .mainLogo {
-  font-family: The Last of Us;
-  color: whitesmoke;
-  text-align: center;
-  font-size: 700%;
-  padding: 20px;
+  font-family: The Last of Us; /* Кастомный шрифт */
+  color: whitesmoke; /* Цвет текста */
+  text-align: center; /* Выравнивание по центру */
+  font-size: 700%; /* Очень крупный текст */
+  padding: 20px; /* Внутренние отступы */
 }
 
+/* Главное меню */
 .mainMenu {
-  font-family: Roboto-Regular;
-  text-align: center;
-  font-size: 140%;
-  margin: 20px;
+  font-family: Roboto-Regular; /* Шрифт */
+  text-align: center; /* Выравнивание по центру */
+  font-size: 140%; /* Крупный текст */
+  margin: 20px; /* Внешние отступы */
 }
 
+/* Кнопка "Наверх" */
 #scrollToTopBtn {
-  display: none; /* Скрыть кнопку по умолчанию */
-  position: fixed; /* Фиксированное положение */
+  display: none; /* Скрыта по умолчанию */
+  position: fixed; /* Фиксированная позиция */
   bottom: 95px; /* Отступ снизу */
   left: 30px; /* Отступ слева */
-  z-index: 99; /* Чтобы кнопка была поверх других элементов */
-  border: none; /* Убрать границу */
-  outline: none; /* Убрать контур */
-  background-color: rgb(25, 25, 25); /* Цвет фона */
-  color: #ffffff; /* Цвет текста */
-  cursor: pointer; /* Изменить курсор при наведении */
-  padding: 15px; /* Внутренний отступ */
-  border-radius: 50%; /* Сделать кнопку круглой */
+  z-index: 99; /* Поверх других элементов */
+  border: none; /* Без рамки */
+  outline: none; /* Без контура */
+  background-color: rgb(25, 25, 25); /* Темный фон */
+  color: #ffffff; /* Белый текст */
+  cursor: pointer; /* Указатель при наведении */
+  padding: 15px; /* Внутренние отступы */
+  border-radius: 50%; /* Круглая форма */
   font-size: 18px; /* Размер текста */
-  width: 50px; /* Ширина кнопки */
-  height: 50px; /* Высота кнопки */
-  display: flex; /* Для центрирования стрелки */
+  width: 50px; /* Фиксированная ширина */
+  height: 50px; /* Фиксированная высота */
+  display: flex; /* Flex-контейнер */
   align-items: center; /* Вертикальное центрирование */
   justify-content: center; /* Горизонтальное центрирование */
-  transition: background-color 0.3s; /* Плавное изменение цвета */
+  transition: background-color 0.3s; /* Анимация цвета */
 }
 
+/* Кнопка при наведении */
 #scrollToTopBtn:hover {
-  background-color: #ffd060; /* Цвет фона при наведении */
+  background-color: #ffd060; /* Золотистый цвет */
 }
 
-@keyframes fadeIn { /*Правило CSS и название анимации*/
-  from { opacity: 0; } /*Начальное состояние анимации(0%)*/
-  to { opacity: 1; } /*Конечное состояние анимации (100%)*/
+/* Анимация появления */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  } /* Начало - прозрачность 0 */
+  to {
+    opacity: 1;
+  } /* Конец - полная видимость */
 }
 
-#scrollToTopBtn { /*Стиль для кнопки Наверх*/
-  animation: fadeIn 0.6s ease-in-out; /*Скорость появление и плавность*/
+/* Применение анимации */
+#scrollToTopBtn {
+  animation: fadeIn 0.6s ease-in-out; /* Плавное появление */
 }
 
+/* Подвал сайта */
 footer {
-  background-color:rgb(25, 25, 25);
-  color: #ffffff;
-  padding: 20px 0;
-  text-align: center;
+  background-color: rgb(25, 25, 25); /* Темный фон */
+  color: #ffffff; /* Белый текст */
+  padding: 20px 0; /* Вертикальные отступы */
+  text-align: center; /* Выравнивание по центру */
 }
 
-footer p{
-  color:#ffffff;
-  font-family: Roboto-Regular;
+/* Текст в подвале */
+footer p {
+  color: #ffffff; /* Белый цвет */
+  font-family: Roboto-Regular; /* Шрифт */
 }
 
-.footer-content { /*Сам размер блока*/
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* Контейнер содержимого подвала */
+.footer-content {
+  max-width: 1200px; /* Максимальная ширина */
+  margin: 0 auto; /* Центрирование */
+  padding: 0 20px; /* Боковые отступы */
 }
 
-.footer-links { /*Кнопки и футтере*/
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0;
-  padding-left: 20px; /* Смещаем список левее, добавляя отступ слева */
-  font-family: Roboto-Regular;
+/* Ссылки в подвале */
+.footer-links {
+  list-style: none; /* Удаление маркеров */
+  padding: 0; /* Обнуление отступов */
+  margin: 10px 0 0; /* Внешние отступы */
+  padding-left: 20px; /* Отступ слева */
+  font-family: Roboto-Regular; /* Шрифт */
 }
