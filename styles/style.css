@@ -143,6 +143,7 @@ footer {
   color: #ffffff; /* Белый текст */
   padding: 20px 0; /* Вертикальные отступы */
   text-align: center; /* Выравнивание по центру */
+  margin-top: 25px;
 }
 
 /* Текст в подвале */
