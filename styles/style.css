@@ -1,169 +1,153 @@
-/* Обнуление дефолтных отступов у всех элементов */
+/* ================= ОБЩИЕ СТИЛИ ================= */
+/* Обнуление дефолтных отступов */
 * {
-  margin: 0; /* Убирает внешние отступы */
-  padding: 0; /* Убирает внутренние отступы */
+  margin: 0;
+  padding: 0;
 }
 
-/* Настройки корневого элемента */
+/* Плавная прокрутка страницы */
 html {
-  scroll-behavior: smooth; /* Плавная прокрутка страницы */
+  scroll-behavior: smooth;
 }
 
-/* Подключение шрифта Oswald-Bold */
+/* Подключение шрифтов */
 @font-face {
-  font-family: "Oswald-Bold"; /* Название шрифта */
-  src: url(../fonts/Oswald/static/Oswald-Bold.ttf); /* Путь к файлу шрифта */
+  font-family: "Oswald-Bold";
+  src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
 }
 
-/* Подключение шрифта Roboto-Regular */
 @font-face {
-  font-family: "Roboto-Regular"; /* Название шрифта */
-  src: url(../fonts/Roboto/Roboto-Regular.ttf); /* Путь к файлу шрифта */
+  font-family: "Roboto-Regular";
+  src: url(../fonts/Roboto/Roboto-Regular.ttf);
 }
 
-/* Подключение кастомного шрифта */
 @font-face {
-  font-family: "The Last Of Us"; /* Название шрифта */
-  src: url(../fonts/the-last-of-us/The\ Last\ Of\ Us.ttf); /* Путь к файлу шрифта */
+  font-family: "The Last Of Us";
+  src: url(../fonts/the-last-of-us/The\ Last\ Of\ Us.ttf);
 }
 
 /* Основные стили страницы */
 body {
-  background-image: url(../images/Background/BlackWall.jpg); /* Фоновое изображение */
-  background-repeat: no-repeat; /* Запрет повторения фона */
-  background-size: cover; /* Растягивание на весь экран */
+  background-image: url(../images/Background/BlackWall.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-/* Базовые стили для всех ссылок */
+/* Стилизация ссылок */
 a {
-  color: initial; /* Возврат к исходному цвету */
-  text-decoration: none; /* Удаление подчеркивания */
+  color: initial;
+  text-decoration: none;
 }
 
-/* Непосещенные ссылки */
 a:link {
-  color: #565656; /* Темно-серый цвет */
-  transition-duration: 0.3s; /* Длительность анимации */
+  color: #565656;
+  transition-duration: 0.3s;
 }
 
-/* Посещенные ссылки */
 a:visited {
-  color: #565656; /* Темно-серый цвет */
+  color: #565656;
 }
 
-/* Состояние при наведении */
 a:hover {
-  color: #ffffff; /* Белый цвет */
-  transition-duration: 0.3s; /* Длительность анимации */
+  color: #ffffff;
+  transition-duration: 0.3s;
 }
 
 /* Стилизация списков */
 ul {
-  list-style-type: none; /* Удаление маркеров списка */
+  list-style-type: none;
 }
 
-/* Элементы списка */
 li {
-  display: inline; /* Горизонтальное расположение */
-  padding-left: 25px; /* Отступ слева */
-  padding-right: 25px; /* Отступ справа */
-  padding-bottom: 10px; /* Отступ снизу */
-  margin-top: 10px; /* Отступ сверху */
+  display: inline;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 10px;
+  margin-top: 10px;
 }
 
-/* Основной контент */
+/* ================= ШАПКА САЙТА ================= */
 .main {
-  background-color: rgb(25, 25, 25); /* Темный фон */
-  padding-bottom: 10px; /* Отступ снизу */
+  background-color: rgb(25, 25, 25);
+  padding-bottom: 10px;
 }
 
-/* Логотип */
 .mainLogo {
-  font-family: The Last of Us; /* Кастомный шрифт */
-  color: whitesmoke; /* Цвет текста */
-  text-align: center; /* Выравнивание по центру */
-  font-size: 700%; /* Очень крупный текст */
-  padding: 20px; /* Внутренние отступы */
+  font-family: The Last of Us;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 700%;
+  padding: 20px;
 }
 
-/* Главное меню */
 .mainMenu {
-  font-family: Roboto-Regular; /* Шрифт */
-  text-align: center; /* Выравнивание по центру */
-  font-size: 140%; /* Крупный текст */
-  margin: 20px; /* Внешние отступы */
+  font-family: Roboto-Regular;
+  text-align: center;
+  font-size: 140%;
+  margin: 20px;
 }
 
-/* Кнопка "Наверх" */
+/* ================= КНОПКА "НАВЕРХ" ================= */
 #scrollToTopBtn {
-  display: none; /* Скрыта по умолчанию */
-  position: fixed; /* Фиксированная позиция */
-  bottom: 95px; /* Отступ снизу */
-  left: 30px; /* Отступ слева */
-  z-index: 99; /* Поверх других элементов */
-  border: none; /* Без рамки */
-  outline: none; /* Без контура */
-  background-color: rgb(25, 25, 25); /* Темный фон */
-  color: #ffffff; /* Белый текст */
-  cursor: pointer; /* Указатель при наведении */
-  padding: 15px; /* Внутренние отступы */
-  border-radius: 50%; /* Круглая форма */
-  font-size: 18px; /* Размер текста */
-  width: 50px; /* Фиксированная ширина */
-  height: 50px; /* Фиксированная высота */
-  display: flex; /* Flex-контейнер */
-  align-items: center; /* Вертикальное центрирование */
-  justify-content: center; /* Горизонтальное центрирование */
-  transition: background-color 0.3s; /* Анимация цвета */
+  display: none;
+  position: fixed;
+  bottom: 95px;
+  left: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: rgb(25, 25, 25);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 18px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
 }
 
-/* Кнопка при наведении */
 #scrollToTopBtn:hover {
-  background-color: #ffd060; /* Золотистый цвет */
+  background-color: #ffd060;
 }
 
-/* Анимация появления */
+/* Анимация появления кнопки */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  } /* Начало - прозрачность 0 */
-  to {
-    opacity: 1;
-  } /* Конец - полная видимость */
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Применение анимации */
 #scrollToTopBtn {
-  animation: fadeIn 0.6s ease-in-out; /* Плавное появление */
+  animation: fadeIn 0.6s ease-in-out;
 }
 
-/* Подвал сайта */
+/* ================= ПОДВАЛ САЙТА ================= */
 footer {
-  background-color: rgb(25, 25, 25); /* Темный фон */
-  color: #ffffff; /* Белый текст */
-  padding: 20px 0; /* Вертикальные отступы */
-  text-align: center; /* Выравнивание по центру */
+  background-color: rgb(25, 25, 25);
+  color: #ffffff;
+  padding: 20px 0;
+  text-align: center;
   margin-top: 25px;
 }
 
-/* Текст в подвале */
 footer p {
-  color: #ffffff; /* Белый цвет */
-  font-family: Roboto-Regular; /* Шрифт */
+  color: #ffffff;
+  font-family: Roboto-Regular;
 }
 
-/* Контейнер содержимого подвала */
 .footer-content {
-  max-width: 1200px; /* Максимальная ширина */
-  margin: 0 auto; /* Центрирование */
-  padding: 0 20px; /* Боковые отступы */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* Ссылки в подвале */
 .footer-links {
-  list-style: none; /* Удаление маркеров */
-  padding: 0; /* Обнуление отступов */
-  margin: 10px 0 0; /* Внешние отступы */
-  padding-left: 20px; /* Отступ слева */
-  font-family: Roboto-Regular; /* Шрифт */
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  padding-left: 20px;
+  font-family: Roboto-Regular;
 }

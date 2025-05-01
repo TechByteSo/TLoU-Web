@@ -1,99 +1,98 @@
+/* ================= СЕКЦИЯ ВВЕДЕНИЯ ================= */
 .intro {
-  margin: 0; /* Обнуление внешних отступов */
-  padding: 0; /* Обнуление внутренних отступов */
-  background-image: url(../images/Background/TLoU\ P1\ v2.jpg); /* Фоновое изображение */
-  background-position: top; /* Выравнивание фона по верхнему краю */
-  background-repeat: no-repeat; /* Запрет повторения фона */
-  background-size: 100%; /* Растягивание фона на всю ширину */
-  padding-bottom: 2.7%; /* Нижний внутренний отступ */
+  margin: 0;
+  padding: 0;
+  background-image: url(../images/Background/TLoU\ P1\ v2.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding-bottom: 2.7%;
 }
 
-/*Заголовок интро*/
+/* Заголовок интро */
 .Introduction {
-  font-family: Oswald-Bold; /* Название шрифта */
-  color: #ffffff; /* Цвет текста - белый */
-  margin-left: 13%; /* Левый внешний отступ */
-  margin-right: 45%; /* Правый внешний отступ */
-  margin-bottom: 3%; /* Нижний внешний отступ */
-  padding-top: 40px; /* Верхний внутренний отступ */
-  font-size: 300%; /* Размер шрифта */
+  font-family: Oswald-Bold;
+  color: #ffffff;
+  margin-left: 13%;
+  margin-right: 45%;
+  margin-bottom: 3%;
+  padding-top: 40px;
+  font-size: 300%;
 }
 
-/*Текст интро*/
+/* Текст интро */
 .IntroText {
-  font-family: Roboto-Regular; /* Название шрифта */
-  color: #ffffff; /* Цвет текста - белый */
-  margin-left: 13%; /* Левый внешний отступ */
-  margin-right: 60%; /* Правый внешний отступ */
-  padding-top: 10px; /* Верхний внутренний отступ */
-  font-size: 150%; /* Размер шрифта */
+  font-family: Roboto-Regular;
+  color: #ffffff;
+  margin-left: 13%;
+  margin-right: 60%;
+  padding-top: 10px;
+  font-size: 150%;
 }
 
-/* Левый контейнер */
+/* ================= ЛЕВЫЙ КОНТЕЙНЕР ================= */
 .containerL {
-  margin-left: 13%; /* Левый внешний отступ */
-  margin-right: 13%; /* Правый внешний отступ */
-  padding-top: 25px; /* Верхний внутренний отступ */
-  display: grid; /* Активация CSS Grid */
-  grid-template-columns: auto 1fr; /* Две колонки: ширина по содержимому и оставшееся пространство */
-  opacity: 0; /* Начальная прозрачность (для анимации) */
-  transform: translateY(50px); /* Смещение вниз (для анимации) */
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Параметры анимации */
+  margin-left: 13%;
+  margin-right: 13%;
+  padding-top: 25px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Класс для анимации левого контейнера */
 .containerL.visible {
-  opacity: 1; /* Полная видимость */
-  transform: translateY(0); /* Возврат в исходное положение */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .containerL h2 {
-  color: #ffd060; /* Цвет заголовка - золотистый */
+  color: #ffd060;
 }
 
 .imageL {
-  width: 600px; /* Фиксированная ширина изображения */
-  height: auto; /* Автоматическая высота */
-  margin-right: 20px; /* Отступ справа */
+  width: 600px;
+  height: auto;
+  margin-right: 20px;
 }
 
 .textL {
-  font-size: 120%; /* Размер текста */
-  font-family: Roboto-Regular; /* Шрифт */
-  color: #ffffff; /* Цвет текста */
+  font-size: 120%;
+  font-family: Roboto-Regular;
+  color: #ffffff;
 }
 
-/* Правый контейнер */
+/* ================= ПРАВЫЙ КОНТЕЙНЕР ================= */
 .containerR {
-  margin-left: 13%; /* Левый внешний отступ */
-  margin-right: 13%; /* Правый внешний отступ */
-  padding-top: 25px; /* Верхний внутренний отступ */
-  padding-bottom: 25px; /* Нижний внутренний отступ */
-  display: grid; /* Активация CSS Grid */
-  grid-template-columns: auto 1fr; /* Две колонки: ширина по содержимому и оставшееся пространство */
-  opacity: 0; /* Начальная прозрачность (для анимации) */
-  transform: translateY(50px); /* Смещение вниз (для анимации) */
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Параметры анимации */
+  margin-left: 13%;
+  margin-right: 13%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Класс для анимации правого контейнера */
 .containerR.visible {
-  opacity: 1; /* Полная видимость */
-  transform: translateY(0); /* Возврат в исходное положение */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .containerR h2 {
-  color: #ffd060; /* Цвет заголовка - золотистый */
+  color: #ffd060;
 }
 
 .imageR {
-  width: 600px; /* Фиксированная ширина изображения */
-  height: auto; /* Автоматическая высота */
-  margin-left: 20px; /* Отступ слева */
+  width: 600px;
+  height: auto;
+  margin-left: 20px;
 }
 
 .textR {
-  font-size: 120%; /* Размер текста */
-  font-family: Roboto-Regular; /* Шрифт */
-  color: #ffffff; /* Цвет текста */
+  font-size: 120%;
+  font-family: Roboto-Regular;
+  color: #ffffff;
 }

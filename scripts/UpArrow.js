@@ -1,32 +1,33 @@
-// Получаем элемент кнопки "Наверх" по ID
+/**
+ * Управление кнопкой "Наверх"
+ * 
+ * 1. Показывает/скрывает кнопку при скролле
+ * 2. Обеспечивает плавную прокрутку вверх
+ */
+
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-// Функция для показа/скрытия кнопки при скролле
+// Функция показа/скрытия кнопки
 function toggleScrollToTopButton() {
-  // Проверяем положение скролла (для старых и новых браузеров)
-  if (
-    document.body.scrollTop > 600 ||
-    document.documentElement.scrollTop > 600
-  ) {
-    // Если прокрутили больше 600px - показываем кнопку
-    scrollToTopBtn.style.display = "flex"; // Используем flex для центрирования
+  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  
+  if (scrollPosition > 600) {
+    scrollToTopBtn.style.display = "flex";
   } else {
-    // Если меньше 600px - скрываем кнопку
     scrollToTopBtn.style.display = "none";
   }
 }
 
-// Проверяем положение при загрузке страницы (на случай если страница загрузилась прокрученной)
+// Инициализация при загрузке
 toggleScrollToTopButton();
 
-// Вешаем обработчик скролла на окно браузера
+// Обработчик скролла
 window.onscroll = toggleScrollToTopButton;
 
-// Добавляем обработчик клика на кнопку
-scrollToTopBtn.addEventListener("click", function () {
-  // Плавно прокручиваем страницу вверх
+// Обработчик клика
+scrollToTopBtn.addEventListener("click", function() {
   window.scrollTo({
-    top: 0, // В самое начало (координата Y = 0)
-    behavior: "smooth", // Плавная анимация прокрутки
+    top: 0,
+    behavior: "smooth"
   });
 });

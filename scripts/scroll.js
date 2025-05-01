@@ -1,37 +1,39 @@
-// Ждем полной загрузки DOM-дерева перед выполнением кода
-document.addEventListener("DOMContentLoaded", function () {
-  // Отключаем автоматическое восстановление позиции скролла браузером
+/**
+ * Обработчик прокрутки страницы и анимации контейнеров
+ * 
+ * 1. Отключает автоматическое восстановление позиции скролла
+ * 2. Прокручивает страницу вверх при загрузке
+ * 3. Анимирует появление контейнеров при скролле
+ */
+
+// Ждем полной загрузки DOM
+document.addEventListener("DOMContentLoaded", function() {
+  // 1. Отключаем автоматическое восстановление позиции скролла
   if (history.scrollRestoration) {
-    history.scrollRestoration = "manual"; // Устанавливаем ручное управление скроллом
+    history.scrollRestoration = "manual";
   }
 
-  // Прокручиваем страницу вверх при полной загрузке страницы
-  window.onload = function () {
-    window.scrollTo(0, 0); // Позиция X=0, Y=0 (левый верхний угол)
+  // 2. Прокрутка вверх при загрузке страницы
+  window.onload = function() {
+    window.scrollTo(0, 0);
   };
 
-  // Находим все контейнеры с классами containerL и containerR
+  // 3. Анимация контейнеров при скролле
   const containers = document.querySelectorAll(".containerL, .containerR");
-
-  // Создаем Intersection Observer для отслеживания появления элементов в viewport
+  
   const observer = new IntersectionObserver(
     (entries) => {
-      // Для каждого наблюдаемого элемента
-      entries.forEach((entry) => {
-        // Если элемент стал видимым
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("visible"); // Добавляем класс для анимации
-          observer.unobserve(entry.target); // Прекращаем наблюдение за элементом
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
         }
       });
     },
-    {
-      threshold: 0.1, // Элемент считается видимым, когда 10% его площади в viewport
-    }
+    { threshold: 0.1 }
   );
 
-  // Начинаем наблюдение за каждым контейнером
-  containers.forEach((container) => {
+  containers.forEach(container => {
     observer.observe(container);
   });
 });
