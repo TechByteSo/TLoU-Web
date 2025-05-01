@@ -10,29 +10,29 @@
 const charactersData = {
   "Джоэл": {
     images: [
-      "/images/characters/Joel1.png",
-      "/images/characters/Joel2.png",
-      "/images/characters/Joel3.png",
-      "/images/characters/Joel4.png",
-      "/images/characters/Joel5.png"
+      "images/characters/Joel1.png",
+      "images/characters/Joel2.png",
+      "images/characters/Joel3.png",
+      "images/characters/Joel4.png",
+      "images/characters/Joel5.png"
     ],
     fullName: "Джоэл Миллер",
     description: "Суровый и закалённый в жестоком мире после пандемии, Джоэл давно усвоил простое правило: доверять нельзя никому. За его грубой оболочкой скрывается человек, переживший слишком много потерь, из-за чего он предпочитает держать дистанцию. Однако за цинизмом и холодной расчётливостью прячется способность к глубокой привязанности — просто он уже не верит, что это того стоит."
   },
   "Элли": {
     images: [
-      "/images/characters/Ellie1.png",
-      "/images/characters/Ellie2.png",
-      "/images/characters/Ellie3.png",
-      "/images/characters/Ellie4.png"
+      "images/characters/Ellie1.png",
+      "images/characters/Ellie2.png",
+      "images/characters/Ellie3.png",
+      "images/characters/Ellie4.png"
     ],
     fullName: "Элли Уильямс",
     description: "Острая на язык, дерзкая и невероятно сообразительная, Элли выросла в мире, где слабые не выживают. Её юмор и сарказм — броня против жестокости реальности, но за этим скрывается любопытство и даже наивность, которые она тщательно маскирует. Она не боится спорить, бунтовать и идти против правил, но в глубине души остаётся ребёнком, который ищет своё место в этом мрачном мире."
   },
   "Томми": {
     images: [
-      "/images/characters/Tommy1.png",
-      "/images/characters/Tommy2.png"
+      "images/characters/Tommy1.png",
+      "images/characters/Tommy2.png"
     ],
     fullName: "Томми Миллер",
     description: "Более мягкий и открытый, чем Джоэл, Томми не растерял веру в людей, несмотря на все ужасы, которые им пришлось пережить. Он старается видеть в других лучшее и верит, что сообщество и взаимовыручка — единственный способ не просто выжить, но и начать жить снова. Его харизма и умение находить общий язык с разными людьми делают его тем, за кем другие готовы идти."
