@@ -1,90 +1,107 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <!-- Базовые настройки -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
-  <title>Персонажи</title>
-  
-  <!-- Подключение CSS -->
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="/styles/stylecharacters.css">
-</head>
-<body>
-  <!-- Шапка сайта -->
-  <header class="main">
-    <div class="mainLogo">THE LAST OF US PART I</div>
-    <nav class="mainMenu">
-      <ul>
-        <li><a href="index.html">ГЛАВНАЯ</a></li>
-        <li><a href="characters.html">ПЕРСОНАЖИ</a></li>
-        <li><a href="#">ГАЛЛЕРЕЯ</a></li>
-      </ul>
-    </nav>
-  </header>
+  <head>
+    <!-- Базовые настройки -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <title>Персонажи</title>
 
-  <!-- Блок с персонажами -->
-  <div class="characters-container">
-    <!-- Карточка персонажа 1 -->
-    <div class="character-card">
-      <div class="character-image-container">
-        <img src="/images/characters/Joel1.png" alt="Джоэл" class="character-image">
-      </div>
-      <h3 class="character-name">Джоэл</h3>
-    </div>
-    
-    <!-- Карточка персонажа 2 -->
-    <div class="character-card">
-      <div class="character-image-container">
-        <img src="/images/characters/Ellie1.png" alt="Элли" class="character-image">
-      </div>
-      <h3 class="character-name">Элли</h3>
-    </div>
-    
-    <!-- Карточка персонажа 3 -->
-    <div class="character-card">
-      <div class="character-image-container">
-        <img src="/images/characters/Tommy1.png" alt="Томми" class="character-image">
-      </div>
-      <h3 class="character-name">Томми</h3>
-    </div>
-  </div>
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/stylecharacters.css" />
+  </head>
+  <body>
+    <!-- Шапка сайта -->
+    <header class="main">
+      <div class="mainLogo">THE LAST OF US PART I</div>
+      <nav class="mainMenu">
+        <ul>
+          <li><a href="index.html">ГЛАВНАЯ</a></li>
+          <li><a href="characters.html">ПЕРСОНАЖИ</a></li>
+          <li><a href="gallery.html">ГАЛЕРЕЯ</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- Модальное окно персонажа -->
-  <div id="characterModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div class="modal-body">
-        <div class="image-container">
-          <button class="nav-btn prev-btn">⬅</button>
-          <img id="modalCharacterImage" src="" alt="Персонаж" class="modal-image">
-          <button class="nav-btn next-btn">➡</button>
-          <div class="image-counter">
-            <span id="currentImage">1</span>/<span id="totalImages">3</span>
+    <!-- Блок с персонажами -->
+    <div class="characters-container">
+      <!-- Карточка персонажа 1 -->
+      <div class="character-card">
+        <div class="character-image-container">
+          <img
+            src="/images/characters/Joel1.png"
+            alt="Джоэл"
+            class="character-image"
+          />
+        </div>
+        <h3 class="character-name">Джоэл</h3>
+      </div>
+
+      <!-- Карточка персонажа 2 -->
+      <div class="character-card">
+        <div class="character-image-container">
+          <img
+            src="/images/characters/Ellie1.png"
+            alt="Элли"
+            class="character-image"
+          />
+        </div>
+        <h3 class="character-name">Элли</h3>
+      </div>
+
+      <!-- Карточка персонажа 3 -->
+      <div class="character-card">
+        <div class="character-image-container">
+          <img
+            src="/images/characters/Tommy1.png"
+            alt="Томми"
+            class="character-image"
+          />
+        </div>
+        <h3 class="character-name">Томми</h3>
+      </div>
+    </div>
+
+    <!-- Модальное окно персонажа -->
+    <div id="characterModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body">
+          <div class="image-container">
+            <button class="nav-btn prev-btn">⬅</button>
+            <img
+              id="modalCharacterImage"
+              src=""
+              alt="Персонаж"
+              class="modal-image"
+            />
+            <button class="nav-btn next-btn">➡</button>
+            <div class="image-counter">
+              <span id="currentImage">1</span>/<span id="totalImages">3</span>
+            </div>
+          </div>
+          <div class="modal-text">
+            <h2 id="modalCharacterName"></h2>
+            <h3 id="modalCharacterFullName"></h3>
+            <p id="modalCharacterDescription"></p>
           </div>
         </div>
-        <div class="modal-text">
-          <h2 id="modalCharacterName"></h2>
-          <h3 id="modalCharacterFullName"></h3>
-          <p id="modalCharacterDescription"></p>
-        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Подвал сайта -->
-  <footer>
-    <div class="footer-content">
-      <p>Pet-project by TechByteSo</p>
-      <ul class="footer-links">
-        <li><a href="https://t.me/techbyteso">TELEGRAM</a></li>
-        <li><a href="https://github.com/TechByteSo">GITHUB</a></li>
-        <li><a href="#">ЕЩЁ ЧТО-ТО</a></li>
-      </ul>
-    </div>
-  </footer>
+    <!-- Подвал сайта -->
+    <footer>
+      <div class="footer-content">
+        <p>Pet-project by TechByteSo</p>
+        <ul class="footer-links">
+          <li><a href="https://t.me/techbyteso">TELEGRAM</a></li>
+          <li><a href="https://github.com/TechByteSo">GITHUB</a></li>
+          <li><a href="#">ЕЩЁ ЧТО-ТО</a></li>
+        </ul>
+      </div>
+    </footer>
 
-  <!-- Подключение JavaScript -->
-  <script src="/scripts/characters.js"></script>
-</body>
+    <!-- Подключение JavaScript -->
+    <script src="/scripts/characters.js"></script>
+  </body>
 </html>

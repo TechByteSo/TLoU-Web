@@ -1,0 +1,89 @@
+.gallery-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 10px auto;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.gallery-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-card {
+  width: 350px;
+  border: 2px solid #565656;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #2a2a2a;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.gallery-card:hover {
+  border-color: #ffffff;
+  transition: none;
+}
+
+.gallery-image-container {
+  overflow: hidden;
+  border-radius: 13px;
+  line-height: 0;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: none !important;
+}
+
+/* Все остальные стили остаются без изменений */
+.gallery-intro {
+  text-align: center;
+  padding: 15px;
+}
+
+.gallery-intro h1 {
+  font-family: "Oswald-Bold", sans-serif;
+  color: #ffd060;
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.gallery-intro.animate-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.gallery-intro.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-card:nth-child(1) { transition-delay: 0.1s; }
+.gallery-card:nth-child(2) { transition-delay: 0.2s; }
+.gallery-card:nth-child(3) { transition-delay: 0.3s; }
+
+@media (max-width: 768px) {
+  .gallery-card {
+    width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-card {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 10px;
+  }
+}
