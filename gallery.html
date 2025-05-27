@@ -20,7 +20,7 @@
     </nav>
   </header>
 
-  <!-- Заголовок галереи с классом для анимации -->
+  <!-- Заголовок галереи -->
   <div class="gallery-intro animate-fade-up">
     <h1>СКРИНШОТЫ ИГРЫ</h1>
   </div>
@@ -115,6 +115,23 @@
     <div class="gallery-card">
       <div class="gallery-image-container">
         <img src="images/Gallery/15.png" alt="The Last of Us скриншот" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+ <!-- Модальное окно для просмотра -->
+  <div id="screenshotModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-body">
+        <div class="image-container">
+          <button class="nav-btn prev-btn">⬅</button>
+          <img id="modalScreenshot" src="" alt="Скриншот" class="modal-image">
+          <button class="nav-btn next-btn">➡</button>
+          <div class="image-counter">
+            <span id="currentImage">1</span>/<span id="totalImages">0</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
