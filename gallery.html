@@ -25,111 +25,113 @@
     <h1>СКРИНШОТЫ ИГРЫ</h1>
   </div>
 
-   <!-- Галерея -->
+  <!-- Галерея -->
   <div class="gallery-container">
-    <!-- Пример элемента (добавь столько, сколько нужно) -->
-    <div class="gallery-card">
+    <!-- Все карточки с data-index -->
+    <div class="gallery-card" data-index="0">
       <div class="gallery-image-container">
         <img src="images/Gallery/1.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
     
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="1">
       <div class="gallery-image-container">
         <img src="images/Gallery/2.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
     
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="2">
       <div class="gallery-image-container">
         <img src="images/Gallery/3.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="3">
       <div class="gallery-image-container">
         <img src="images/Gallery/4.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="4">
       <div class="gallery-image-container">
         <img src="images/Gallery/5.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="5">
       <div class="gallery-image-container">
         <img src="images/Gallery/6.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="6">
       <div class="gallery-image-container">
         <img src="images/Gallery/7.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="7">
       <div class="gallery-image-container">
         <img src="images/Gallery/8.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="8">
       <div class="gallery-image-container">
         <img src="images/Gallery/9.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="9">
       <div class="gallery-image-container">
         <img src="images/Gallery/10.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="10">
       <div class="gallery-image-container">
         <img src="images/Gallery/11.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="11">
       <div class="gallery-image-container">
         <img src="images/Gallery/12.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="12">
       <div class="gallery-image-container">
         <img src="images/Gallery/13.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="13">
       <div class="gallery-image-container">
         <img src="images/Gallery/14.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
 
-    <div class="gallery-card">
+    <div class="gallery-card" data-index="14">
       <div class="gallery-image-container">
         <img src="images/Gallery/15.png" alt="The Last of Us скриншот" loading="lazy">
       </div>
     </div>
   </div>
 
- <!-- Модальное окно для просмотра -->
+  <!-- Модальное окно для просмотра -->
   <div id="screenshotModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close-btn">&times;</span>
       <div class="modal-body">
         <div class="image-container">
           <button class="nav-btn prev-btn">⬅</button>
-          <img id="modalScreenshot" src="" alt="Скриншот" class="modal-image">
+          <div class="slider-container">
+            <!-- Изображения будут добавлены через JS -->
+          </div>
           <button class="nav-btn next-btn">➡</button>
           <div class="image-counter">
-            <span id="currentImage">1</span>/<span id="totalImages">0</span>
+            <span id="currentImage">1</span>/<span id="totalImages">15</span>
           </div>
         </div>
       </div>
