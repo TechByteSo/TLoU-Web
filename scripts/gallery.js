@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
+  console.log("Gallery script loaded"); // Для отладки
+
   // 1. Подготовка данных и элементов
   const screenshots = [
     "images/Gallery/1.png",
@@ -28,13 +30,19 @@ document.addEventListener("DOMContentLoaded", function() {
   const nextBtn = document.querySelector(".next-btn");
   const galleryCards = document.querySelectorAll(".gallery-card");
 
+  console.log("Elements found:", {
+    modal: !!modal,
+    sliderContainer: !!sliderContainer,
+    galleryCards: galleryCards.length
+  });
+
   // Переменные состояния
   let currentIndex = 0;
-  let isAnimating = false;
   let modalImages = [];
 
   // 2. Инициализация слайдера
   function initSlider() {
+    console.log("Initializing slider...");
     sliderContainer.innerHTML = '';
     modalImages = [];
     
@@ -43,12 +51,23 @@ document.addEventListener("DOMContentLoaded", function() {
       const img = document.createElement('img');
       img.src = src;
       img.alt = `Скриншот ${index + 1}`;
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'contain';
+      img.style.position = 'absolute';
+      img.style.top = '0';
+      img.style.left = '0';
       
-      // Первое изображение делаем видимым
-      if (index === 0) {
-        img.classList.add('active');
+      // Скрываем все кроме первого
+      if (index !== 0) {
+        img.style.opacity = '0';
+        img.style.visibility = 'hidden';
+      } else {
+        img.style.opacity = '1';
+        img.style.visibility = 'visible';
       }
       
+      img.style.transition = 'opacity 0.3s ease';
       sliderContainer.appendChild(img);
       modalImages.push(img);
     });
@@ -56,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 3. Функция открытия модального окна
   function openModal(index) {
+    console.log("Opening modal with index:", index);
     if (index < 0 || index >= screenshots.length) return;
     
     currentIndex = index;
@@ -67,7 +87,13 @@ document.addEventListener("DOMContentLoaded", function() {
   // 4. Обновление состояния слайдера
   function updateSlider() {
     modalImages.forEach((img, index) => {
-      img.classList.toggle('active', index === currentIndex);
+      if (index === currentIndex) {
+        img.style.opacity = '1';
+        img.style.visibility = 'visible';
+      } else {
+        img.style.opacity = '0';
+        img.style.visibility = 'hidden';
+      }
     });
     
     currentSpan.textContent = currentIndex + 1;
@@ -75,30 +101,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 5. Навигация между изображениями
   function navigate(direction) {
-    if (isAnimating) return;
-    
-    isAnimating = true;
-    const oldIndex = currentIndex;
     currentIndex = (currentIndex + direction + screenshots.length) % screenshots.length;
-    
-    // Прячем старое изображение
-    modalImages[oldIndex].classList.remove('active');
-    
-    // Показываем новое с анимацией
-    setTimeout(() => {
-      modalImages[currentIndex].classList.add('active');
-      isAnimating = false;
-      currentSpan.textContent = currentIndex + 1;
-    }, 100);
+    updateSlider();
   }
 
   // 6. Обработчики событий для карточек галереи
-  galleryCards.forEach((card) => {
+  galleryCards.forEach((card, index) => {
+    card.setAttribute('data-index', index);
     card.addEventListener("click", function() {
       const cardIndex = parseInt(this.getAttribute('data-index'));
-      if (!isNaN(cardIndex) && cardIndex >= 0 && cardIndex < screenshots.length) {
-        openModal(cardIndex);
-      }
+      console.log("Card clicked, index:", cardIndex);
+      openModal(cardIndex);
     });
   });
 
@@ -107,13 +120,13 @@ document.addEventListener("DOMContentLoaded", function() {
   nextBtn.addEventListener("click", () => navigate(1));
 
   // 8. Закрытие модального окна
-  closeBtn.addEventListener("click", () => {
+  closeBtn.addEventListener("click", function() {
     modal.style.display = "none";
     document.body.style.overflow = "auto";
   });
 
   // 9. Закрытие по клику вне изображения
-  window.addEventListener("click", (e) => {
+  window.addEventListener("click", function(e) {
     if (e.target === modal) {
       modal.style.display = "none";
       document.body.style.overflow = "auto";
@@ -121,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // 10. Навигация с клавиатуры
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", function(e) {
     if (modal.style.display === "block") {
       if (e.key === "ArrowLeft") {
         navigate(-1);
@@ -134,27 +147,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // 11. Анимация появления элементов при загрузке
-  const galleryIntro = document.querySelector(".gallery-intro");
-  const galleryContainer = document.querySelector(".gallery-container");
-  
-  setTimeout(() => {
-    galleryIntro.classList.add("visible");
-  }, 100);
-
-  setTimeout(() => {
-    galleryContainer.classList.add("visible");
-    
+  // 11. Простая анимация появления карточек
+  function animateCards() {
+    console.log("Animating cards...");
     galleryCards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      
       setTimeout(() => {
-        card.style.opacity = "1";
-        card.style.transform = "translateY(0)";
-      }, 150 * index);
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100 + index * 100);
     });
-  }, 300);
+  }
 
   // 12. Инициализация
+  console.log("Initializing gallery...");
   totalSpan.textContent = screenshots.length;
   initSlider();
+  
+  // Запускаем анимацию после небольшой задержки
+  setTimeout(animateCards, 300);
   window.scrollTo(0, 0);
 });
