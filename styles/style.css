@@ -128,7 +128,7 @@ li {
 footer {
   background-color: rgb(25, 25, 25);
   color: #ffffff;
-  padding: 20px 0;
+  padding: 10px 0;
   text-align: center;
   margin-top: 25px;
 }
@@ -136,6 +136,7 @@ footer {
 footer p {
   color: #ffffff;
   font-family: Roboto-Regular;
+  margin-bottom: 8px;
 }
 
 .footer-content {
@@ -147,7 +148,141 @@ footer p {
 .footer-links {
   list-style: none;
   padding: 0;
-  margin: 10px 0 0;
-  padding-left: 20px;
+  margin: 0;
   font-family: Roboto-Regular;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.footer-links li {
+  display: inline-block;
+}
+
+/* ================= АДАПТИВ ДЛЯ БОЛЬШИХ ПЛАНШЕТОВ (1024px) ================= */
+@media (max-width: 1024px) {
+  .mainLogo {
+    font-size: 500%;
+    padding: 15px;
+  }
+  
+  .mainMenu {
+    font-size: 130%;
+    margin: 15px;
+  }
+  
+  .mainMenu li {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .footer-links {
+    gap: 35px;
+  }
+  
+  #scrollToTopBtn {
+    bottom: 80px;
+  }
+}
+
+/* ================= АДАПТИВ ДЛЯ ПЛАНШЕТОВ (768px) ================= */
+@media (max-width: 768px) {
+  .mainLogo {
+    font-size: 400%;
+    padding: 15px;
+  }
+  
+  .mainMenu {
+    font-size: 120%;
+    margin: 15px;
+  }
+  
+  .mainMenu li {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .footer-links {
+    gap: 30px;
+  }
+  
+  #scrollToTopBtn {
+    bottom: 70px;
+    left: 25px;
+  }
+}
+
+/* ================= АДАПТИВ ДЛЯ МОБИЛЬНЫХ (480px) ================= */
+@media (max-width: 480px) {
+  .mainMenu ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .mainMenu li {
+    display: inline-block;
+    padding: 5px 8px;
+    margin: 0;
+  }
+  
+  .mainLogo {
+    font-size: 250%;
+    padding: 10px;
+  }
+  
+  .mainMenu {
+    font-size: 100%;
+    margin: 10px;
+  }
+  
+  #scrollToTopBtn {
+    bottom: 60px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+  }
+  
+  .footer-links {
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  footer {
+    padding: 8px 0;
+  }
+}
+
+/* ================= АДАПТИВ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (360px) ================= */
+@media (max-width: 360px) {
+  .mainLogo {
+    font-size: 200%;
+  }
+  
+  .mainMenu ul {
+    gap: 5px;
+  }
+  
+  .mainMenu li {
+    padding: 4px 6px;
+  }
+  
+  .footer-links {
+    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links li {
+    margin-bottom: 5px;
+  }
+  
+  #scrollToTopBtn {
+    bottom: 50px;
+    left: 15px;
+  }
 }

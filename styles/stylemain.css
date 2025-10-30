@@ -96,3 +96,162 @@
   font-family: Roboto-Regular;
   color: #ffffff;
 }
+
+/* ================= АДАПТИВ ДЛЯ БОЛЬШИХ ПЛАНШЕТОВ (1024px) ================= */
+@media (max-width: 1024px) {
+  .intro {
+    background-size: cover;
+    padding-bottom: 6%;
+  }
+  
+  .Introduction {
+    font-size: 220%;
+    margin-left: 8%;
+    margin-right: 8%;
+    text-align: center;
+  }
+  
+  .IntroText {
+    font-size: 130%;
+    margin-left: 8%;
+    margin-right: 8%;
+    text-align: center;
+  }
+  
+  .containerL,
+  .containerR {
+    margin-left: 8%;
+    margin-right: 8%;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .imageL,
+  .imageR {
+    width: 100%;
+    margin: 0;
+    order: 2;
+  }
+  
+  .textL,
+  .textR {
+    font-size: 110%;
+    text-align: center;
+    order: 1;
+  }
+}
+
+/* ================= АДАПТИВ ДЛЯ ПЛАНШЕТОВ (768px) ================= */
+@media (max-width: 768px) {
+  .intro {
+    background-size: cover;
+    padding-bottom: 5%;
+  }
+  
+  .Introduction {
+    font-size: 200%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+  }
+  
+  .IntroText {
+    font-size: 120%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+  }
+  
+  .containerL,
+  .containerR {
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .imageL,
+  .imageR {
+    width: 100%;
+    margin: 0;
+    order: 2;
+  }
+  
+  .textL,
+  .textR {
+    font-size: 100%;
+    text-align: center;
+    order: 1;
+  }
+}
+
+/* ================= АДАПТИВ ДЛЯ МОБИЛЬНЫХ (480px) ================= */
+@media (max-width: 480px) {
+  .intro {
+    background-size: cover;
+    padding-bottom: 8%;
+  }
+  
+  .Introduction {
+    font-size: 150%;
+    margin-left: 3%;
+    margin-right: 3%;
+    text-align: center;
+  }
+  
+  .IntroText {
+    font-size: 100%;
+    margin-left: 3%;
+    margin-right: 3%;
+    text-align: center;
+  }
+  
+  .containerL,
+  .containerR {
+    margin-left: 3%;
+    margin-right: 3%;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .imageL,
+  .imageR {
+    width: 100%;
+    margin: 0;
+    order: 2;
+  }
+  
+  .textL,
+  .textR {
+    font-size: 95%;
+    text-align: center;
+    order: 1;
+  }
+}
+
+/* ================= АДАПТИВ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (360px) ================= */
+@media (max-width: 360px) {
+  .Introduction {
+    font-size: 130%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .IntroText {
+    font-size: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .containerL,
+  .containerR {
+    margin-left: 2%;
+    margin-right: 2%;
+    gap: 10px;
+  }
+  
+  .textL,
+  .textR {
+    font-size: 90%;
+  }
+}
