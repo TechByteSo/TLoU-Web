@@ -3,21 +3,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 1. Подготовка данных и элементов
   const screenshots = [
-    "images/Gallery/1.png",
-    "images/Gallery/2.png",
-    "images/Gallery/3.png",
-    "images/Gallery/4.png",
-    "images/Gallery/5.png",
-    "images/Gallery/6.png",
-    "images/Gallery/7.png",
-    "images/Gallery/8.png",
-    "images/Gallery/9.png",
-    "images/Gallery/10.png",
-    "images/Gallery/11.png",
-    "images/Gallery/12.png",
-    "images/Gallery/13.png",
-    "images/Gallery/14.png",
-    "images/Gallery/15.png"
+    "images/Gallery/Webp/1.webp",
+    "images/Gallery/Webp/2.webp",
+    "images/Gallery/Webp/3.webp",
+    "images/Gallery/Webp/4.webp",
+    "images/Gallery/Webp/5.webp",
+    "images/Gallery/Webp/6.webp",
+    "images/Gallery/Webp/7.webp",
+    "images/Gallery/Webp/8.webp",
+    "images/Gallery/Webp/9.webp",
+    "images/Gallery/Webp/10.webp",
+    "images/Gallery/Webp/11.webp",
+    "images/Gallery/Webp/12.webp",
+    "images/Gallery/Webp/13.webp",
+    "images/Gallery/Webp/14.webp",
+    "images/Gallery/Webp/15.webp",
   ];
 
   // Получаем элементы DOM

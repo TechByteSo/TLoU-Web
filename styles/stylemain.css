@@ -1,257 +1,224 @@
 /* ================= СЕКЦИЯ ВВЕДЕНИЯ ================= */
 .intro {
   margin: 0;
-  padding: 0;
-  background-image: url(../images/Background/TLoU\ P1\ v2.jpg);
-  background-position: top;
+  padding: 2rem 1rem;
+  background-image: url(../images/Background/Webp/The\ Last\ of\ Us\ Part\ 1\ intro.webp);
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
-  padding-bottom: 2.7%;
+  background-size: cover;
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Заголовок интро */
+/* Общее затемнение для всего текста интро */
+.intro-content {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .Introduction {
   font-family: Oswald-Bold;
   color: #ffffff;
-  margin-left: 13%;
-  margin-right: 45%;
-  margin-bottom: 3%;
-  padding-top: 40px;
-  font-size: 300%;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  text-align: center;
+  line-height: 1.3;
 }
 
-/* Текст интро */
 .IntroText {
   font-family: Roboto-Regular;
   color: #ffffff;
-  margin-left: 13%;
-  margin-right: 60%;
-  padding-top: 10px;
-  font-size: 150%;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 1.5;
 }
 
-/* ================= ЛЕВЫЙ КОНТЕЙНЕР ================= */
-.containerL {
-  margin-left: 13%;
-  margin-right: 13%;
-  padding-top: 25px;
+/* ================= КОНТЕЙНЕРЫ С КОНТЕНТОМ ================= */
+.containerL, .containerR {
+  margin: 2rem auto;
+  padding: 2rem 1rem;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1400px;
+  width: 100%;
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.containerL.visible {
+.containerL.visible, .containerR.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.containerL h2 {
+.containerL h2, .containerR h2 {
   color: #ffd060;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: Oswald-Bold;
 }
 
-.imageL {
-  width: 600px;
+.imageL, .imageR {
+  width: 100%;
   height: auto;
-  margin-right: 20px;
+  border-radius: 8px;
 }
 
-.textL {
-  font-size: 120%;
+.textL, .textR {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
   font-family: Roboto-Regular;
   color: #ffffff;
+  text-align: justify;
+  line-height: 1.4;
+  padding: 1rem;
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 8px;
 }
 
-/* ================= ПРАВЫЙ КОНТЕЙНЕР ================= */
-.containerR {
-  margin-left: 13%;
-  margin-right: 13%;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.containerR.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.containerR h2 {
-  color: #ffd060;
-}
-
-.imageR {
-  width: 600px;
-  height: auto;
-  margin-left: 20px;
-}
-
-.textR {
-  font-size: 120%;
-  font-family: Roboto-Regular;
-  color: #ffffff;
-}
-
-/* ================= АДАПТИВ ДЛЯ БОЛЬШИХ ПЛАНШЕТОВ (1024px) ================= */
-@media (max-width: 1024px) {
+/* ================= АДАПТИВ ДЛЯ БОЛЬШИХ ЭКРАНОВ ================= */
+@media (min-width: 1024px) {
   .intro {
-    background-size: cover;
-    padding-bottom: 6%;
+    padding: 3rem 2rem;
+    min-height: 70vh;
+  }
+  
+  .intro-content {
+    max-width: 60%;
+    margin-left: 0;
+    margin-right: auto;
+    padding: 2.5rem;
   }
   
   .Introduction {
-    font-size: 220%;
-    margin-left: 8%;
-    margin-right: 8%;
-    text-align: center;
+    text-align: left;
   }
   
   .IntroText {
-    font-size: 130%;
-    margin-left: 8%;
-    margin-right: 8%;
-    text-align: center;
+    text-align: left;
   }
   
-  .containerL,
+  .containerL, .containerR {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 3rem 2rem;
+  }
+  
+  .containerL {
+    grid-template-areas: "image text";
+  }
+  
   .containerR {
-    margin-left: 8%;
-    margin-right: 8%;
-    grid-template-columns: 1fr;
-    gap: 25px;
+    grid-template-areas: "text image";
   }
   
-  .imageL,
+  .imageL {
+    grid-area: image;
+  }
+  
+  .textL {
+    grid-area: text;
+  }
+  
   .imageR {
-    width: 100%;
-    margin: 0;
-    order: 2;
+    grid-area: image;
   }
   
-  .textL,
   .textR {
-    font-size: 110%;
-    text-align: center;
-    order: 1;
+    grid-area: text;
+  }
+  
+  .containerL h2, .containerR h2 {
+    text-align: left;
   }
 }
 
-/* ================= АДАПТИВ ДЛЯ ПЛАНШЕТОВ (768px) ================= */
-@media (max-width: 768px) {
+/* ================= АДАПТИВ ДЛЯ 2K И 4K ЭКРАНОВ ================= */
+@media (min-width: 2000px) {
   .intro {
-    background-size: cover;
-    padding-bottom: 5%;
+    min-height: 80vh;
+    padding: 5rem 3rem;
   }
   
-  .Introduction {
-    font-size: 200%;
-    margin-left: 5%;
-    margin-right: 5%;
-    text-align: center;
+  .containerL, .containerR {
+    max-width: 1800px;
+    gap: 4rem;
+    padding: 4rem 3rem;
   }
   
-  .IntroText {
-    font-size: 120%;
-    margin-left: 5%;
-    margin-right: 5%;
-    text-align: center;
-  }
-  
-  .containerL,
-  .containerR {
-    margin-left: 5%;
-    margin-right: 5%;
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .imageL,
-  .imageR {
-    width: 100%;
-    margin: 0;
-    order: 2;
-  }
-  
-  .textL,
-  .textR {
-    font-size: 100%;
-    text-align: center;
-    order: 1;
+  .textL, .textR {
+    font-size: 1.5rem;
+    padding: 1.5rem;
   }
 }
 
-/* ================= АДАПТИВ ДЛЯ МОБИЛЬНЫХ (480px) ================= */
+/* ================= АДАПТИВ ДЛЯ ПЛАНШЕТОВ ================= */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .intro {
+    padding: 2rem 1.5rem;
+  }
+  
+  .intro-content {
+    max-width: 80%;
+  }
+  
+  .containerL, .containerR {
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+}
+
+/* ================= АДАПТИВ ДЛЯ МОБИЛЬНЫХ ================= */
 @media (max-width: 480px) {
   .intro {
-    background-size: cover;
-    padding-bottom: 8%;
+    padding: 1.5rem 1rem;
+    min-height: 50vh;
   }
   
-  .Introduction {
-    font-size: 150%;
-    margin-left: 3%;
-    margin-right: 3%;
-    text-align: center;
+  .intro-content {
+    padding: 1.5rem;
   }
   
-  .IntroText {
-    font-size: 100%;
-    margin-left: 3%;
-    margin-right: 3%;
-    text-align: center;
+  .containerL, .containerR {
+    margin: 1rem auto;
+    padding: 1rem 1rem;
+    gap: 1rem;
   }
   
-  .containerL,
-  .containerR {
-    margin-left: 3%;
-    margin-right: 3%;
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  
-  .imageL,
-  .imageR {
-    width: 100%;
-    margin: 0;
-    order: 2;
-  }
-  
-  .textL,
-  .textR {
-    font-size: 95%;
-    text-align: center;
-    order: 1;
+  .textL, .textR {
+    padding: 0.8rem;
+    text-align: left;
+    line-height: 1.4;
   }
 }
 
-/* ================= АДАПТИВ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (360px) ================= */
+/* ================= АДАПТИВ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ================= */
 @media (max-width: 360px) {
-  .Introduction {
-    font-size: 130%;
-    margin-left: 2%;
-    margin-right: 2%;
+  .intro {
+    padding: 1rem 0.5rem;
   }
   
-  .IntroText {
-    font-size: 90%;
-    margin-left: 2%;
-    margin-right: 2%;
+  .intro-content {
+    padding: 1rem;
   }
   
-  .containerL,
-  .containerR {
-    margin-left: 2%;
-    margin-right: 2%;
-    gap: 10px;
+  .containerL, .containerR {
+    padding: 0.8rem 0.5rem;
   }
   
-  .textL,
-  .textR {
-    font-size: 90%;
+  .textL, .textR {
+    padding: 0.7rem;
+    line-height: 1.3;
   }
 }
