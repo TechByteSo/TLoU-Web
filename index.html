@@ -41,10 +41,13 @@
   <!-- Блок с контентом (изображение слева) -->
   <div class="containerL">
     <div class="imageL">
-      <img src="images/Index/Webp/Сontent 1.webp" alt="Сюжет" style="width: 100%; height: auto;">
+      <picture>
+        <source srcset="images/Index/Webp/Сontent 1.webp" type="image/webp">
+        <img src="images/Index/fallback/Сontent 1.jpg" alt="Сюжет" loading="lazy">
+      </picture>
     </div>
     <div class="textL">
-      <h2>АТМСОСФЕРНЫЙ СЮЖЕТ</h2>
+      <h2>АТМОСФЕРНЫЙ СЮЖЕТ</h2>
       <p>"The Last of Us Part I" — это захватывающая история о выживании и человеческих связях в постапокалиптическом
         мире. В центре сюжета находятся Джоэл и Элли, которые отправляются в опасное путешествие через опустошенные
         земли, где каждое решение может стать фатальным. Эта игра погружает вас в эмоциональную глубину их отношений,
@@ -66,12 +69,15 @@
         стратегический и тесно связан с сюжетом.</p>
     </div>
     <div class="imageR">
-      <img src="images/Index/Webp/Content 2.webp" alt="Геймплей" style="width: 100%; height: auto;">
+      <picture>
+        <source srcset="images/Index/Webp/Content 2.webp" type="image/webp">
+        <img src="images/Index/fallback/Content 2.jpg" alt="Геймплей" loading="lazy">
+      </picture>
     </div>
   </div>
 
   <!-- Кнопка прокрутки вверх -->
-  <button id="scrollToTopBtn" title="Наверх">⬆</button>
+  <button id="scrollToTopBtn" title="Наверх" aria-label="Прокрутить страницу вверх">⬆</button>
 
   <!-- Подвал сайта -->
   <footer>

@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-  console.log("Gallery script loaded"); // Для отладки
-
   // 1. Подготовка данных и элементов
   const screenshots = [
     "images/Gallery/Webp/1.webp",
@@ -30,11 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
   const nextBtn = document.querySelector(".next-btn");
   const galleryCards = document.querySelectorAll(".gallery-card");
 
-  console.log("Elements found:", {
-    modal: !!modal,
-    sliderContainer: !!sliderContainer,
-    galleryCards: galleryCards.length
-  });
+  // Проверка существования элементов
+  if (!modal || !sliderContainer || !currentSpan || !totalSpan || !closeBtn || !prevBtn || !nextBtn) {
+    return;
+  }
 
   // Переменные состояния
   let currentIndex = 0;
@@ -42,14 +39,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 2. Инициализация слайдера
   function initSlider() {
-    console.log("Initializing slider...");
     sliderContainer.innerHTML = '';
     modalImages = [];
     
-    // Создаем элементы изображений для слайдера
+    // Создаем элементы изображений для слайдера с picture и fallback
     screenshots.forEach((src, index) => {
+      const picture = document.createElement('picture');
+      const source = document.createElement('source');
+      source.srcset = src;
+      source.type = 'image/webp';
+      
       const img = document.createElement('img');
-      img.src = src;
+      img.src = `images/Gallery/fallback/${index + 1}.png`;
       img.alt = `Скриншот ${index + 1}`;
       img.style.width = '100%';
       img.style.height = '100%';
@@ -68,14 +69,16 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       
       img.style.transition = 'opacity 0.3s ease';
-      sliderContainer.appendChild(img);
-      modalImages.push(img);
+      
+      picture.appendChild(source);
+      picture.appendChild(img);
+      sliderContainer.appendChild(picture);
+      modalImages.push({ picture, img });
     });
   }
 
   // 3. Функция открытия модального окна
   function openModal(index) {
-    console.log("Opening modal with index:", index);
     if (index < 0 || index >= screenshots.length) return;
     
     currentIndex = index;
@@ -86,13 +89,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 4. Обновление состояния слайдера
   function updateSlider() {
-    modalImages.forEach((img, index) => {
-      if (index === currentIndex) {
-        img.style.opacity = '1';
-        img.style.visibility = 'visible';
-      } else {
-        img.style.opacity = '0';
-        img.style.visibility = 'hidden';
+    modalImages.forEach((item, index) => {
+      if (item && item.img) {
+        if (index === currentIndex) {
+          item.img.style.opacity = '1';
+          item.img.style.visibility = 'visible';
+          if (item.picture) {
+            item.picture.style.display = 'flex';
+          }
+        } else {
+          item.img.style.opacity = '0';
+          item.img.style.visibility = 'hidden';
+          if (item.picture) {
+            item.picture.style.display = 'none';
+          }
+        }
       }
     });
     
@@ -110,8 +121,9 @@ document.addEventListener("DOMContentLoaded", function() {
     card.setAttribute('data-index', index);
     card.addEventListener("click", function() {
       const cardIndex = parseInt(this.getAttribute('data-index'));
-      console.log("Card clicked, index:", cardIndex);
-      openModal(cardIndex);
+      if (!isNaN(cardIndex)) {
+        openModal(cardIndex);
+      }
     });
   });
 
@@ -149,7 +161,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 11. Простая анимация появления карточек
   function animateCards() {
-    console.log("Animating cards...");
     galleryCards.forEach((card, index) => {
       card.style.opacity = '0';
       card.style.transform = 'translateY(20px)';
@@ -163,7 +174,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // 12. Инициализация
-  console.log("Initializing gallery...");
   totalSpan.textContent = screenshots.length;
   initSlider();
   

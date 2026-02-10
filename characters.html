@@ -28,11 +28,15 @@
       <!-- Карточка персонажа 1 -->
       <div class="character-card">
         <div class="character-image-container">
-          <img
-            src="images/characters/Joel1.png"
-            alt="Джоэл"
-            class="character-image"
-          />
+          <picture>
+            <source srcset="images/characters/Webp/Joel1.webp" type="image/webp">
+            <img
+              src="images/characters/fallback/Joel1.png"
+              alt="Джоэл"
+              class="character-image"
+              loading="lazy"
+            />
+          </picture>
         </div>
         <h3 class="character-name">Джоэл</h3>
       </div>
@@ -40,11 +44,15 @@
       <!-- Карточка персонажа 2 -->
       <div class="character-card">
         <div class="character-image-container">
-          <img
-            src="images/characters/Ellie1.png"
-            alt="Элли"
-            class="character-image"
-          />
+          <picture>
+            <source srcset="images/characters/Webp/Ellie1.webp" type="image/webp">
+            <img
+              src="images/characters/fallback/Ellie1.png"
+              alt="Элли"
+              class="character-image"
+              loading="lazy"
+            />
+          </picture>
         </div>
         <h3 class="character-name">Элли</h3>
       </div>
@@ -52,11 +60,15 @@
       <!-- Карточка персонажа 3 -->
       <div class="character-card">
         <div class="character-image-container">
-          <img
-            src="images/characters/Tommy1.png"
-            alt="Томми"
-            class="character-image"
-          />
+          <picture>
+            <source srcset="images/characters/Webp/Tommy1.webp" type="image/webp">
+            <img
+              src="images/characters/fallback/Tommy1.png"
+              alt="Томми"
+              class="character-image"
+              loading="lazy"
+            />
+          </picture>
         </div>
         <h3 class="character-name">Томми</h3>
       </div>
@@ -65,17 +77,17 @@
     <!-- Модальное окно персонажа -->
     <div id="characterModal" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close" aria-label="Закрыть модальное окно">&times;</span>
         <div class="modal-body">
           <div class="image-container">
-            <button class="nav-btn prev-btn">⬅</button>
+            <button class="nav-btn prev-btn" aria-label="Предыдущее изображение">⬅</button>
             <img
               id="modalCharacterImage"
               src=""
               alt="Персонаж"
               class="modal-image"
             />
-            <button class="nav-btn next-btn">➡</button>
+            <button class="nav-btn next-btn" aria-label="Следующее изображение">➡</button>
             <div class="image-counter">
               <span id="currentImage">1</span>/<span id="totalImages">3</span>
             </div>

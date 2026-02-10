@@ -17,7 +17,7 @@
 .intro-content {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 8px;
-  padding: 2rem;
+  padding: 2rem clamp(1rem, 4vw, 3rem);
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
@@ -29,8 +29,21 @@
   font-size: clamp(1.8rem, 5vw, 3.5rem);
   margin: 0 0 1.5rem 0;
   padding: 0;
+  padding-bottom: 1.5rem;
   text-align: left;
   line-height: 1.3;
+  position: relative;
+}
+
+.Introduction::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+  pointer-events: none;
 }
 
 .IntroText {
@@ -46,7 +59,7 @@
 /* ================= КОНТЕЙНЕРЫ С КОНТЕНТОМ ================= */
 .containerL, .containerR {
   margin: 2rem auto;
-  padding: 2rem 1rem;
+  padding: 2rem clamp(1rem, 4vw, 3rem);
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
@@ -74,6 +87,27 @@
   width: 100%;
   height: auto;
   border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imageL:hover, .imageR:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+.imageL picture,
+.imageR picture {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.imageL img,
+.imageR img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .textL, .textR {
@@ -85,6 +119,12 @@
   padding: 1rem;
   background: rgba(30, 30, 30, 0.8);
   border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.textL:hover, .textR:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
 }
 
 /* ================= АДАПТИВ ДЛЯ БОЛЬШИХ ЭКРАНОВ ================= */

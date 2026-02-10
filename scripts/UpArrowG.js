@@ -5,29 +5,35 @@
  * 2. Обеспечивает плавную прокрутку вверх
  */
 
-const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-// Функция показа/скрытия кнопки
-function toggleScrollToTopButton() {
-  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+document.addEventListener("DOMContentLoaded", function() {
+  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
   
-  if (scrollPosition > 350) {
-    scrollToTopBtn.style.display = "flex";
-  } else {
-    scrollToTopBtn.style.display = "none";
+  if (!scrollToTopBtn) {
+    return;
   }
-}
 
-// Инициализация при загрузке
-toggleScrollToTopButton();
+  // Функция показа/скрытия кнопки
+  function toggleScrollToTopButton() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollPosition > 350) {
+      scrollToTopBtn.style.display = "flex";
+    } else {
+      scrollToTopBtn.style.display = "none";
+    }
+  }
 
-// Обработчик скролла
-window.onscroll = toggleScrollToTopButton;
+  // Инициализация при загрузке
+  toggleScrollToTopButton();
 
-// Обработчик клика
-scrollToTopBtn.addEventListener("click", function() {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+  // Обработчик скролла
+  window.addEventListener("scroll", toggleScrollToTopButton);
+
+  // Обработчик клика
+  scrollToTopBtn.addEventListener("click", function() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   });
 });

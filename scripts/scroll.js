@@ -21,19 +21,21 @@ document.addEventListener("DOMContentLoaded", function() {
   // 3. Анимация контейнеров при скролле
   const containers = document.querySelectorAll(".containerL, .containerR");
   
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
+  if (containers.length > 0 && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-  containers.forEach(container => {
-    observer.observe(container);
-  });
+    containers.forEach(container => {
+      observer.observe(container);
+    });
+  }
 });

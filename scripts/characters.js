@@ -49,6 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeBtn = document.querySelector(".close");
   const characterCards = document.querySelectorAll(".character-card");
 
+  // Проверка существования элементов
+  if (!modal || !modalName || !modalFullName || !modalDescription || !closeBtn || characterCards.length === 0) {
+    return;
+  }
+
   // Переменные состояния
   let currentCharacter = null;
   let currentImageIndex = 0;
@@ -113,8 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
     currentImageIndex = 0;
 
     const imageContainer = document.querySelector(".image-container");
+    if (!imageContainer) return;
+    
     imageContainer.innerHTML = `
-      <button class="nav-btn prev-btn">⬅</button>
+      <button class="nav-btn prev-btn" aria-label="Предыдущее изображение">⬅</button>
       <div class="image-slider">
         <div class="slide-container">
           ${characterData.images
@@ -122,12 +129,12 @@ document.addEventListener("DOMContentLoaded", function () {
               (img, index) =>
                 `<img src="${img}" alt="${characterName}" class="modal-image ${
                   index === 0 ? "active" : ""
-                }">`
+                }" onerror="this.onerror=null; this.src='${img.replace('/Webp/', '/fallback/').replace('.webp', '.png')}';">`
             )
             .join("")}
         </div>
       </div>
-      <button class="nav-btn next-btn">➡</button>
+      <button class="nav-btn next-btn" aria-label="Следующее изображение">➡</button>
       <div class="image-counter">
         <span class="current-image">1</span>/<span class="total-images">${
           characterData.images.length
@@ -148,12 +155,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = "hidden";
 
     // Назначение обработчиков кнопок
-    document
-      .querySelector(".prev-btn")
-      .addEventListener("click", () => changeImage("prev"));
-    document
-      .querySelector(".next-btn")
-      .addEventListener("click", () => changeImage("next"));
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => changeImage("prev"));
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => changeImage("next"));
+    }
 
     initSlider();
   }
@@ -161,7 +170,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Функция инициализации слайдера
   function initSlider() {
     const slider = document.querySelector(".image-slider");
+    if (!slider) return;
+    
     const slideContainer = slider.querySelector(".slide-container");
+    if (!slideContainer) return;
+    
     const slides = slideContainer.querySelectorAll(".modal-image");
     const slideWidth = slider.offsetWidth;
 
@@ -198,7 +211,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const slider = document.querySelector(".image-slider");
+    if (!slider) {
+      isAnimating = false;
+      return;
+    }
+    
     const slideContainer = slider.querySelector(".slide-container");
+    if (!slideContainer) {
+      isAnimating = false;
+      return;
+    }
+    
     const slideWidth = slider.offsetWidth;
 
     slideContainer.style.transition = "transform 0.5s ease";
