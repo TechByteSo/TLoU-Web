@@ -10,7 +10,7 @@
 <body>
   <!-- Шапка сайта -->
   <header class="main">
-    <div class="mainLogo">THE LAST OF US PART I</div>
+    <div class="mainLogo"><a href="index.html">THE LAST OF US PART I</a></div>
     <nav class="mainMenu">
       <ul>
         <li><a href="index.html">ГЛАВНАЯ</a></li>
@@ -167,6 +167,13 @@
   <!-- Модальное окно для просмотра -->
   <div id="screenshotModal" class="modal">
     <div class="modal-content">
+      <button class="download-btn" aria-label="Скачать изображение" title="Скачать изображение">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+      </button>
       <span class="close-btn" aria-label="Закрыть модальное окно">&times;</span>
       <div class="modal-body">
         <div class="image-container">
@@ -198,6 +205,7 @@
     </div>
   </footer>
 
+  <script src="scripts/menu.js"></script>
   <script src="scripts/gallery.js"></script>
   <script src="scripts/UpArrowG.js"></script>
 </body>

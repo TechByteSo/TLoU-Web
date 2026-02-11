@@ -1,371 +1,494 @@
 /* ================= ОСНОВНЫЕ НАСТРОЙКИ ================= */
 html {
-  scroll-behavior: smooth; /* Плавная прокрутка страницы */
+  scroll-behavior: smooth;
 }
 
 /* ================= КОНТЕЙНЕР ПЕРСОНАЖЕЙ ================= */
 .characters-container {
-  display: flex; /* Гибкое расположение карточек */
-  justify-content: center; /* Центрирование по горизонтали */
-  gap: 30px; /* Расстояние между карточками */
-  flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
-  max-width: 1200px; /* Максимальная ширина контейнера */
-  margin: 0 auto; /* Центрирование контейнера */
-  margin-top: 50px; /* Отступ сверху */
-  padding: 0 clamp(1rem, 4vw, 3rem); /* Отступы по бокам */
-  opacity: 0; /* Начальная прозрачность для анимации */
-  transform: translateY(30px); /* Начальное положение для анимации */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Параметры анимации */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-top: 4rem;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .characters-container.visible {
-  opacity: 1; /* Полная видимость */
-  transform: translateY(0); /* Конечное положение */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ================= КАРТОЧКИ ПЕРСОНАЖЕЙ ================= */
 .character-card {
-  width: 287px; /* Фиксированная ширина карточки */
-  background-color: #2a2a2a; /* Цвет фона */
-  border-radius: 15px; /* Скругление углов */
-  overflow: hidden; /* Скрытие выходящего за пределы контента */
-  border: 2px solid #565656; /* Граница карточки */
-  transition: all 0.3s ease; /* Плавные переходы */
-  text-align: center; /* Выравнивание текста по центру */
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Анимации */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Тень */
-  cursor: pointer; /* Указатель при наведении */
+  width: 320px;
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
 }
 
-/* Задержки анимации для каждой карточки */
-.character-card:nth-child(1) { transition-delay: 0.1s; }
-.character-card:nth-child(2) { transition-delay: 0.2s; }
-.character-card:nth-child(3) { transition-delay: 0.3s; }
+.character-card:nth-child(1) {
+  animation: fadeInUp 0.6s ease-out 0.2s forwards;
+}
+
+.character-card:nth-child(2) {
+  animation: fadeInUp 0.6s ease-out 0.4s forwards;
+}
+
+.character-card:nth-child(3) {
+  animation: fadeInUp 0.6s ease-out 0.6s forwards;
+}
+
+/* Эффект свечения при наведении */
+.character-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--color-accent), transparent, var(--color-accent));
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.character-card:hover::before {
+  opacity: 0.3;
+}
 
 /* Эффекты при наведении */
 .character-card:hover {
-  border-color: #ffffff; /* Изменение цвета границы */
-  transform: translateY(-5px); /* Поднятие карточки */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Усиление тени */
+  border-color: var(--color-accent);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.7), 
+              0 0 20px rgba(255, 208, 96, 0.2);
 }
 
 /* Контейнер изображения персонажа */
 .character-image-container {
-  overflow: hidden; /* Скрытие выходящего за пределы */
-  border-top-left-radius: 13px; /* Скругление верхних углов */
-  border-top-right-radius: 13px;
+  overflow: hidden;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  position: relative;
+  background: var(--color-dark-bg);
 }
 
-/* Изображение персонажа */
+.character-image-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.character-card:hover .character-image-container::after {
+  opacity: 1;
+}
+
 .character-image-container picture {
   display: block;
   width: 100%;
-  height: 345px;
+  height: 380px;
   overflow: hidden;
 }
 
 .character-image {
-  width: 100%; /* Ширина по размеру контейнера */
-  height: 345px; /* Фиксированная высота */
-  object-fit: cover; /* Заполнение контейнера с сохранением пропорций */
-  transition: transform 0.3s ease; /* Плавное увеличение */
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
 }
 
 /* Эффект увеличения при наведении */
 .character-card:hover .character-image {
-  transform: scale(1.03); /* Небольшое увеличение */
+  transform: scale(1.1);
 }
 
 /* Имя персонажа */
 .character-name {
-  font-family: Roboto-Regular; /* Шрифт */
-  color: #ffffff; /* Цвет текста */
-  padding: 10px; /* Внутренние отступы */
-  margin: 0; /* Обнуление внешних отступов */
-  font-size: 23px; /* Размер шрифта */
+  font-family: "Roboto-Regular", sans-serif;
+  color: var(--color-text-primary);
+  padding: 1.5rem 1rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+  transition: color 0.3s ease;
+}
+
+.character-card:hover .character-name {
+  color: var(--color-accent);
 }
 
 /* ================= МОДАЛЬНОЕ ОКНО ================= */
 .modal {
-  display: none; /* Скрыто по умолчанию */
-  position: fixed; /* Фиксированное позиционирование */
-  z-index: 1000; /* Поверх других элементов */
+  display: none;
+  position: fixed;
+  z-index: 2000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный черный фон */
-  overflow: auto; /* Прокрутка при необходимости */
-  opacity: 0; /* Начальная прозрачность */
-  transition: opacity 0.3s ease; /* Плавное появление */
+  background-color: var(--color-overlay);
+  backdrop-filter: blur(5px);
+  overflow: auto;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
 .modal.show {
-  opacity: 1; /* Полная видимость */
+  opacity: 1;
 }
 
 /* Контент модального окна */
 .modal-content {
-  background-color: #2a2a2a; /* Цвет фона */
-  margin: 5% auto; /* Отступы и центрирование */
-  padding: 40px 25px 25px; /* Внутренние отступы */
-  border: 2px solid #565656; /* Граница */
-  border-radius: 15px; /* Скругление углов */
-  width: 80%; /* Ширина окна */
-  max-width: 920px; /* Максимальная ширина */
-  position: relative; /* Для позиционирования кнопки закрытия */
-  transform: scale(0.95); /* Начальный размер для анимации */
-  transition: transform 0.3s ease, opacity 0.3s ease; /* Параметры анимации */
-  opacity: 0; /* Начальная прозрачность */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); /* Тень для модального окна */
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  margin: 3% auto;
+  padding: 3rem 2.5rem 2.5rem;
+  border: 2px solid var(--color-border);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 1000px;
+  position: relative;
+  transform: scale(0.9) translateY(30px);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
 }
 
 /* Анимация открытия */
 .modal.show .modal-content {
-  transform: scale(1); /* Нормальный размер */
-  opacity: 1; /* Полная видимость */
+  transform: scale(1) translateY(0);
+  opacity: 1;
 }
 
 /* Кнопка закрытия */
 .close {
-  position: absolute; /* Абсолютное позиционирование */
-  right: 25px;
-  top: 25px;
-  color: #565656; /* Цвет крестика */
-  font-size: 36px; /* Размер крестика */
-  font-weight: bold; /* Жирный шрифт */
-  cursor: pointer; /* Указатель при наведении */
-  z-index: 10; /* Поверх других элементов */
-  width: 50px; /* Размеры */
-  height: 50px;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  color: var(--color-text-secondary);
+  font-size: 2rem;
+  font-weight: 300;
+  cursor: pointer;
+  z-index: 10;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Плавные изменения */
-  background: rgba(25, 25, 25, 0.7); /* Фон */
-  border-radius: 50%; /* Круглая форма */
-  border: none; /* Без границы */
-  padding: 0;
-  margin: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
   line-height: 1;
 }
 
-/* Эффект при наведении на кнопку закрытия */
 .close:hover {
-  color: #ffffff; /* Изменение цвета */
+  color: var(--color-text-primary);
+  background: rgba(255, 208, 96, 0.2);
+  border-color: var(--color-accent);
+  transform: rotate(90deg) scale(1.1);
 }
 
 /* Контейнер изображения в модальном окне */
 .image-container {
-  position: relative; /* Для позиционирования кнопок навигации */
-  width: 350px; /* Фиксированная ширина */
-  height: 500px; /* Фиксированная высота */
-  overflow: hidden; /* Скрытие выходящего за пределы */
-  flex-shrink: 0; /* Запрет уменьшения */
+  position: relative;
+  width: auto;
+  min-width: 380px;
+  max-width: 500px;
+  height: 550px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 2px solid var(--color-border);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Слайдер изображений */
+.image-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: block;
+}
+
+.slide-container {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  position: relative;
+}
+
+.slide-container .slide-picture {
+  height: 100%;
+  flex-shrink: 0;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  /* width устанавливается через JavaScript */
 }
 
 /* Изображение в модальном окне */
 .modal-image {
-  width: 350px;
-  height: 500px;
-  object-fit: cover; /* Заполнение с сохранением пропорций */
-  border-radius: 10px; /* Скругление углов */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Тень */
-  flex-shrink: 0; /* Запрет уменьшения */
-  transition: opacity 0.3s ease; /* Плавное изменение прозрачности */
-}
-
-/* Класс для эффекта исчезновения */
-.modal-image.fade {
-  opacity: 0; /* Полная прозрачность */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Кнопки навигации */
 .nav-btn {
-  position: absolute; /* Абсолютное позиционирование */
-  top: 50%; /* По центру по вертикали */
-  transform: translateY(-50%); /* Точное центрирование */
-  width: 40px; /* Размеры */
-  height: 40px;
-  background: rgba(42, 42, 42, 0.7); /* Полупрозрачный фон */
-  color: white; /* Цвет стрелок */
-  border: none; /* Без границы */
-  border-radius: 50%; /* Круглая форма */
-  font-size: 20px; /* Размер стрелок */
-  cursor: pointer; /* Указатель при наведении */
-  z-index: 2; /* Поверх изображения */
-  transition: all 0.3s ease; /* Плавные изменения */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(30, 30, 30, 0.9);
+  backdrop-filter: blur(10px);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Эффект при наведении на кнопки навигации */
 .nav-btn:hover {
-  background: rgba(255, 255, 255, 0.2); /* Изменение фона */
-  transform: translateY(-50%) scale(1.1); /* Увеличение */
+  background: rgba(255, 208, 96, 0.2);
+  border-color: var(--color-accent);
+  transform: translateY(-50%) scale(1.15);
+  color: var(--color-accent);
 }
 
-/* Кнопка "назад" */
+.nav-btn:active {
+  transform: translateY(-50%) scale(1.05);
+}
+
 .prev-btn {
-  left: 10px; /* Позиционирование слева */
+  left: 15px;
 }
 
-/* Кнопка "вперед" */
 .next-btn {
-  right: 10px; /* Позиционирование справа */
+  right: 15px;
 }
 
 /* Счетчик изображений */
 .image-counter {
-  position: absolute; /* Абсолютное позиционирование */
-  bottom: 10px; /* Отступ снизу */
-  left: 50%; /* По центру по горизонтали */
-  transform: translateX(-50%); /* Точное центрирование */
-  font-family: Roboto-Regular; /* Шрифт */
-  background: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
-  padding: 6px 12px; /* Внутренние отступы */
-  border-radius: 20px; /* Скругление углов */
-  color: white; /* Цвет текста */
-  font-size: 14px; /* Размер шрифта */
-  z-index: 2; /* Поверх изображения */
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Roboto-Regular", sans-serif;
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  z-index: 2;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
 }
 
 /* Основное содержимое модального окна */
 .modal-body {
-  display: flex; /* Гибкое расположение */
-  gap: 30px; /* Расстояние между блоками */
-  width: 100%; /* На всю ширину */
+  display: flex;
+  gap: 3rem;
+  width: 100%;
+  align-items: flex-start;
 }
 
 /* Текстовая часть модального окна */
 .modal-text {
-  flex: 1; /* Занимает все доступное пространство */
-  color: white; /* Цвет текста */
-  font-family: Roboto-Regular; /* Шрифт */
-  padding: 0; /* Без внутренних отступов */
-  overflow-y: auto; /* Прокрутка при необходимости */
-  max-height: 500px; /* Максимальная высота */
+  flex: 1;
+  color: var(--color-text-primary);
+  font-family: "Roboto-Regular", sans-serif;
+  padding: 0;
+  overflow-y: auto;
+  max-height: 550px;
+  padding-right: 0.5rem;
+}
+
+/* Кастомный скроллбар */
+.modal-text::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-text::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0.5);
+  border-radius: 3px;
+}
+
+.modal-text::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 3px;
+}
+
+.modal-text::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
 }
 
 /* Заголовок в модальном окне */
 .modal-text h2 {
-  margin-top: 0; /* Без отступа сверху */
-  font-size: 32px; /* Размер шрифта */
-  margin-bottom: 20px; /* Отступ снизу */
+  margin-top: 0;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+  font-family: "Oswald-Bold", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 /* Подзаголовок в модальном окне */
 .modal-text h3 {
-  color: #cccccc; /* Цвет текста */
-  font-size: 24px; /* Размер шрифта */
-  margin-top: -15px; /* Отрицательный отступ */
-  margin-bottom: 20px; /* Отступ снизу */
-  font-family: Roboto-Regular; /* Шрифт */
-  font-weight: normal; /* Нормальное начертание */
+  color: var(--color-text-secondary);
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-family: "Roboto-Regular", sans-serif;
+  font-weight: 400;
 }
 
 /* Абзац в модальном окне */
 .modal-text p {
-  font-size: 18px; /* Размер шрифта */
-  line-height: 1.6; /* Межстрочный интервал */
-  margin: 0; /* Без внешних отступов */
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 0;
+  color: var(--color-text-secondary);
 }
 
 /* ================= АДАПТИВНОСТЬ ================= */
 @media (max-width: 992px) {
-  /* Для экранов меньше 992px */
   .modal-content {
-    width: 90%; /* Увеличение ширины */
+    width: 95%;
+    padding: 2.5rem 1.5rem 2rem;
   }
   
   .modal-body {
-    flex-direction: column; /* Вертикальное расположение */
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .image-container {
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+    margin: 0 auto;
+  }
+  
+  /* На мобильных устройствах слайды должны пересчитываться через JS */
+  .slide-container .slide-picture {
+    /* Ширина устанавливается через JavaScript */
   }
   
   .modal-image {
-    width: 100%; /* На всю ширину */
-    height: 100%; /* На всю высоту */
+    width: 100%;
+    height: 100%;
+  }
+  
+  .modal-text {
+    max-height: none;
   }
 }
 
 @media (max-width: 576px) {
-  /* Для экранов меньше 576px */
+  .character-card {
+    width: 100%;
+    max-width: 320px;
+  }
+  
   .modal-content {
-    padding: 50px 15px 15px; /* Изменение отступов */
-    width: 95%; /* Увеличение ширины */
+    padding: 2rem 1rem 1.5rem;
+    width: 98%;
+    margin: 5% auto;
   }
   
   .close {
-    right: 15px; /* Позиционирование */
-    top: 15px;
-    font-size: 32px; /* Размер крестика */
-    width: 40px; /* Размеры */
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    width: 40px;
     height: 40px;
   }
   
   .nav-btn {
-    width: 30px; /* Размеры */
-    height: 30px;
-    font-size: 16px; /* Размер стрелок */
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .prev-btn {
+    left: 10px;
+  }
+  
+  .next-btn {
+    right: 10px;
+  }
+  
+  .image-container {
+    height: 350px;
   }
   
   .modal-text h2 {
-    font-size: 26px; /* Размер шрифта */
+    font-size: 2rem;
   }
   
   .modal-text h3 {
-    font-size: 20px; /* Размер шрифта */
+    font-size: 1.1rem;
   }
   
   .modal-text p {
-    font-size: 16px; /* Размер шрифта */
+    font-size: 1rem;
   }
 }
 
-/* ================= АНИМАЦИИ СЛАЙДОВ ================= */
-/* Классы для анимации слайдов */
-.modal-image.slide-left {
-  transform: translateX(-100%); /* Сдвиг влево */
-}
-
-.modal-image.next {
-  transform: translateX(100%); /* Сдвиг вправо */
-}
-
-.modal-image.slide-right {
-  transform: translateX(100%); /* Сдвиг вправо */
-}
-
-.modal-image.active {
-  transform: translateX(0) !important; /* Активная позиция */
-  z-index: 1; /* Поверх других */
-}
-
-.modal-image.new-image {
-  z-index: 2; /* Поверх активного */
-}
-
-/* Анимация появления справа */
-.modal-image.slide-from-right {
-  animation: slideFromRight 0.5s forwards;
-}
-
-/* Анимация появления слева */
-.modal-image.slide-from-left {
-  animation: slideFromLeft 0.5s forwards;
-}
-
-/* Ключевые кадры для анимации справа */
-@keyframes slideFromRight {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
-
-/* Ключевые кадры для анимации слева */
-@keyframes slideFromLeft {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
-}
-
-.modal-image.prev {
-  transform: translateX(-100%); /* Сдвиг влево */
+/* ================= АНИМАЦИИ ================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

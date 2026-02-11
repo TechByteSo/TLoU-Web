@@ -48,9 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalDescription = document.getElementById("modalCharacterDescription");
   const closeBtn = document.querySelector(".close");
   const characterCards = document.querySelectorAll(".character-card");
+  const imageContainer = document.querySelector(".image-container");
 
   // Проверка существования элементов
-  if (!modal || !modalName || !modalFullName || !modalDescription || !closeBtn || characterCards.length === 0) {
+  if (!modal || !modalName || !modalFullName || !modalDescription || !closeBtn || characterCards.length === 0 || !imageContainer) {
     return;
   }
 
@@ -58,6 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentCharacter = null;
   let currentImageIndex = 0;
   let isAnimating = false;
+  let sliderInitialized = false;
+  let prevBtnHandler = null;
+  let nextBtnHandler = null;
 
   // Инициализация анимации карточек
   initCardsAnimation();
@@ -116,20 +120,36 @@ document.addEventListener("DOMContentLoaded", function () {
   function openModal(characterData, characterName) {
     currentCharacter = characterData;
     currentImageIndex = 0;
+    sliderInitialized = false;
 
-    const imageContainer = document.querySelector(".image-container");
-    if (!imageContainer) return;
-    
+    // Удаляем старые обработчики если они есть
+    if (prevBtnHandler) {
+      const oldPrevBtn = document.querySelector(".prev-btn");
+      if (oldPrevBtn) {
+        oldPrevBtn.removeEventListener("click", prevBtnHandler);
+      }
+    }
+    if (nextBtnHandler) {
+      const oldNextBtn = document.querySelector(".next-btn");
+      if (oldNextBtn) {
+        oldNextBtn.removeEventListener("click", nextBtnHandler);
+      }
+    }
+
+    // Создаем структуру слайдера
     imageContainer.innerHTML = `
       <button class="nav-btn prev-btn" aria-label="Предыдущее изображение">⬅</button>
       <div class="image-slider">
         <div class="slide-container">
           ${characterData.images
             .map(
-              (img, index) =>
-                `<img src="${img}" alt="${characterName}" class="modal-image ${
-                  index === 0 ? "active" : ""
-                }" onerror="this.onerror=null; this.src='${img.replace('/Webp/', '/fallback/').replace('.webp', '.png')}';">`
+              (img, index) => {
+                const fallbackSrc = img.replace('/Webp/', '/fallback/').replace('.webp', '.png');
+                return `<picture data-index="${index}" class="slide-picture">
+                  <source srcset="${img}" type="image/webp">
+                  <img src="${fallbackSrc}" alt="${characterName}" class="modal-image">
+                </picture>`;
+              }
             )
             .join("")}
         </div>
@@ -142,99 +162,178 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     `;
 
-    updateCounter();
-
+    // Обновляем текст
     modalName.textContent = characterName;
     modalFullName.textContent = characterData.fullName;
     modalDescription.textContent = characterData.description;
 
+    // Показываем модальное окно
     modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+    
     setTimeout(() => {
       modal.classList.add("show");
     }, 10);
-    document.body.style.overflow = "hidden";
 
-    // Назначение обработчиков кнопок
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => changeImage("prev"));
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => changeImage("next"));
-    }
+    // Добавляем обработчики ошибок загрузки изображений
+    const pictures = imageContainer.querySelectorAll('.slide-picture');
+    pictures.forEach((picture, index) => {
+      const img = picture.querySelector('img');
+      if (img) {
+        img.addEventListener('error', function() {
+          console.error(`Ошибка загрузки изображения ${index + 1} для ${characterName}:`, this.src);
+          // Пытаемся загрузить fallback напрямую
+          const fallbackSrc = characterData.images[index].replace('/Webp/', '/fallback/').replace('.webp', '.png');
+          if (!this.src.includes('fallback')) {
+            this.src = fallbackSrc;
+          }
+        });
+      }
+    });
 
-    initSlider();
+    // Инициализируем слайдер после небольшой задержки для рендеринга DOM
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        initSlider();
+        setupEventHandlers();
+      }, 50);
+    });
   }
 
   // Функция инициализации слайдера
   function initSlider() {
     const slider = document.querySelector(".image-slider");
-    if (!slider) return;
+    const slideContainer = document.querySelector(".slide-container");
     
-    const slideContainer = slider.querySelector(".slide-container");
-    if (!slideContainer) return;
-    
-    const slides = slideContainer.querySelectorAll(".modal-image");
-    const slideWidth = slider.offsetWidth;
+    if (!slider || !slideContainer) {
+      console.error("Элементы слайдера не найдены");
+      return;
+    }
 
-    slideContainer.style.width = `${slides.length * 100}%`;
-    slides.forEach((slide) => {
-      slide.style.width = `${slideWidth}px`;
+    const slides = slideContainer.querySelectorAll(".slide-picture");
+    if (slides.length === 0) {
+      console.error("Слайды не найдены");
+      return;
+    }
+
+    // Получаем ширину слайдера
+    const sliderWidth = slider.offsetWidth || slider.clientWidth;
+    
+    if (sliderWidth === 0) {
+      // Если размер еще не определен, повторяем попытку
+      setTimeout(() => initSlider(), 100);
+      return;
+    }
+
+    // Устанавливаем стили для контейнера слайдов
+    slideContainer.style.display = 'flex';
+    slideContainer.style.width = `${slides.length * sliderWidth}px`;
+    slideContainer.style.height = '100%';
+    slideContainer.style.transform = `translateX(0)`;
+
+    // Устанавливаем стили для каждого слайда
+    slides.forEach((slide, index) => {
+      slide.style.width = `${sliderWidth}px`;
+      slide.style.minWidth = `${sliderWidth}px`;
+      slide.style.maxWidth = `${sliderWidth}px`;
+      slide.style.height = '100%';
+      slide.style.flexShrink = '0';
+      slide.style.flexBasis = `${sliderWidth}px`;
+      slide.style.display = 'block';
+      slide.style.position = 'relative';
+      slide.style.overflow = 'hidden';
+      
+      // Устанавливаем стили для изображения внутри слайда
+      const img = slide.querySelector('.modal-image');
+      if (img) {
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.display = 'block';
+      }
     });
+
+    // Устанавливаем начальную позицию
+    currentImageIndex = 0;
+    updateSliderPosition();
+    updateCounter();
+    
+    sliderInitialized = true;
+  }
+
+  // Функция обновления позиции слайдера
+  function updateSliderPosition() {
+    const slider = document.querySelector(".image-slider");
+    const slideContainer = document.querySelector(".slide-container");
+    
+    if (!slider || !slideContainer) return;
+    
+    const sliderWidth = slider.offsetWidth || slider.clientWidth;
+    if (sliderWidth === 0) return;
+    
+    slideContainer.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+    slideContainer.style.transform = `translateX(-${currentImageIndex * sliderWidth}px)`;
   }
 
   // Функция обновления счетчика
   function updateCounter() {
     const counter = document.querySelector(".image-counter");
-    if (counter) {
-      counter.querySelector(".current-image").textContent =
-        currentImageIndex + 1;
-      counter.querySelector(".total-images").textContent =
-        currentCharacter.images.length;
+    if (counter && currentCharacter) {
+      const currentSpan = counter.querySelector(".current-image");
+      const totalSpan = counter.querySelector(".total-images");
+      if (currentSpan) {
+        currentSpan.textContent = currentImageIndex + 1;
+      }
+      if (totalSpan) {
+        totalSpan.textContent = currentCharacter.images.length;
+      }
+    }
+  }
+
+  // Функция настройки обработчиков событий
+  function setupEventHandlers() {
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+    
+    if (prevBtn) {
+      prevBtnHandler = () => changeImage("prev");
+      prevBtn.addEventListener("click", prevBtnHandler);
+    }
+    
+    if (nextBtn) {
+      nextBtnHandler = () => changeImage("next");
+      nextBtn.addEventListener("click", nextBtnHandler);
     }
   }
 
   // Функция смены изображения
   function changeImage(direction) {
-    if (!currentCharacter || isAnimating) return;
+    if (!currentCharacter || isAnimating || !sliderInitialized) return;
+    
     isAnimating = true;
 
-    const oldIndex = currentImageIndex;
+    // Изменяем индекс
     if (direction === "next") {
-      currentImageIndex =
-        (currentImageIndex + 1) % currentCharacter.images.length;
+      currentImageIndex = (currentImageIndex + 1) % currentCharacter.images.length;
     } else {
-      currentImageIndex =
-        (currentImageIndex - 1 + currentCharacter.images.length) %
-        currentCharacter.images.length;
+      currentImageIndex = (currentImageIndex - 1 + currentCharacter.images.length) % currentCharacter.images.length;
     }
 
-    const slider = document.querySelector(".image-slider");
-    if (!slider) {
-      isAnimating = false;
-      return;
-    }
-    
-    const slideContainer = slider.querySelector(".slide-container");
-    if (!slideContainer) {
-      isAnimating = false;
-      return;
-    }
-    
-    const slideWidth = slider.offsetWidth;
-
-    slideContainer.style.transition = "transform 0.5s ease";
-    slideContainer.style.transform = `translateX(-${
-      currentImageIndex * slideWidth
-    }px)`;
-
+    // Обновляем позицию и счетчик
+    updateSliderPosition();
     updateCounter();
 
-    slideContainer.addEventListener("transitionend", function handler() {
-      slideContainer.removeEventListener("transitionend", handler);
+    // Сбрасываем флаг анимации после завершения перехода
+    const slideContainer = document.querySelector(".slide-container");
+    if (slideContainer) {
+      const handleTransitionEnd = () => {
+        slideContainer.removeEventListener("transitionend", handleTransitionEnd);
+        isAnimating = false;
+      };
+      slideContainer.addEventListener("transitionend", handleTransitionEnd, { once: true });
+    } else {
       isAnimating = false;
-    });
+    }
   }
 
   // Функция закрытия модального окна
@@ -242,8 +341,13 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.classList.remove("show");
     setTimeout(() => {
       modal.style.display = "none";
+      document.body.style.overflow = "auto";
+      // Очищаем содержимое слайдера
+      if (imageContainer) {
+        imageContainer.innerHTML = '';
+      }
+      sliderInitialized = false;
     }, 300);
-    document.body.style.overflow = "auto";
   }
 
   // Обработчики событий закрытия
@@ -256,10 +360,26 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.addEventListener("keydown", function (event) {
-    if (modal.style.display === "block" && !isAnimating) {
-      if (event.key === "ArrowLeft") changeImage("prev");
-      else if (event.key === "ArrowRight") changeImage("next");
-      else if (event.key === "Escape") closeModal();
+    if (modal.style.display === "block" && !isAnimating && sliderInitialized) {
+      if (event.key === "ArrowLeft") {
+        changeImage("prev");
+      } else if (event.key === "ArrowRight") {
+        changeImage("next");
+      } else if (event.key === "Escape") {
+        closeModal();
+      }
+    }
+  });
+
+  // Обработчик изменения размера окна для пересчета ширины слайдов
+  let resizeTimeout;
+  window.addEventListener("resize", function() {
+    if (modal.style.display === "block" && sliderInitialized) {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        initSlider();
+        updateSliderPosition();
+      }, 150);
     }
   });
 });
