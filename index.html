@@ -6,6 +6,10 @@
   <meta charset="UTF-8">
   <title>The Last of Us Part I</title>
   
+  <!-- Preload критических изображений -->
+  <link rel="preload" as="image" href="images/Background/Webp/BlackWall.webp">
+  <link rel="preload" as="image" href="images/Background/Webp/The Last of Us Part 1 intro.webp">
+  
   <!-- Подключение CSS -->
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/stylemain.css">
@@ -14,12 +18,22 @@
   <!-- Шапка сайта -->
   <header class="main">
     <div class="mainLogo"><a href="index.html">THE LAST OF US PART I</a></div>
-    <nav class="mainMenu">
+    <button type="button" class="burger-btn" aria-label="Открыть меню" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="burger-overlay" aria-hidden="true"></div>
+    <nav class="mainMenu" aria-label="Главное меню">
       <ul>
         <li><a href="index.html" class="active">ГЛАВНАЯ</a></li>
         <li><a href="characters.html">ПЕРСОНАЖИ</a></li>
         <li><a href="gallery.html">ГАЛЕРЕЯ</a></li>
       </ul>
+      <div class="menu-social">
+        <a href="https://t.me/techbyteso" target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="menu-social-icon menu-social-icon-telegram"></a>
+        <a href="https://github.com/TechByteSo" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="menu-social-icon menu-social-icon-github"></a>
+      </div>
     </nav>
   </header>
 
@@ -43,7 +57,7 @@
     <div class="imageL">
       <picture>
         <source srcset="images/Index/Webp/Сontent 1.webp" type="image/webp">
-        <img src="images/Index/fallback/Сontent 1.jpg" alt="Сюжет" loading="lazy">
+        <img src="images/Index/fallback/Сontent 1.jpg" alt="Сюжет" loading="lazy" fetchpriority="low">
       </picture>
     </div>
     <div class="textL">
@@ -70,7 +84,7 @@
     <div class="imageR">
       <picture>
         <source srcset="images/Index/Webp/Content 2.webp" type="image/webp">
-        <img src="images/Index/fallback/Content 2.jpg" alt="Геймплей" loading="lazy">
+        <img src="images/Index/fallback/Content 2.jpg" alt="Геймплей" loading="lazy" fetchpriority="low">
       </picture>
     </div>
   </div>

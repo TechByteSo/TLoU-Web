@@ -85,6 +85,10 @@ document.addEventListener("DOMContentLoaded", function() {
     
     modal.style.display = "block";
     document.body.style.overflow = "hidden";
+    
+    setTimeout(() => {
+      modal.classList.add("show");
+    }, 10);
   }
 
   // 4. Обновление состояния слайдера
@@ -131,6 +135,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // 7. Обработчики для кнопок навигации
   prevBtn.addEventListener("click", () => navigate(-1));
   nextBtn.addEventListener("click", () => navigate(1));
+  
+  // Добавляем свайп функциональность для галереи
+  setupGallerySwipe();
 
   // 8. Функция скачивания изображения
   function downloadImage() {
@@ -225,21 +232,26 @@ document.addEventListener("DOMContentLoaded", function() {
     downloadBtn.addEventListener("click", downloadImage);
   }
 
-  // 9. Закрытие модального окна
-  closeBtn.addEventListener("click", function() {
-    modal.style.display = "none";
-    document.body.style.overflow = "auto";
-  });
-
-  // 10. Закрытие по клику вне изображения
-  window.addEventListener("click", function(e) {
-    if (e.target === modal) {
+  // 9. Функция закрытия модального окна
+  function closeModal() {
+    modal.classList.remove("show");
+    setTimeout(() => {
       modal.style.display = "none";
       document.body.style.overflow = "auto";
+    }, 300);
+  }
+
+  // 10. Закрытие модального окна
+  closeBtn.addEventListener("click", closeModal);
+
+  // 11. Закрытие по клику вне изображения
+  window.addEventListener("click", function(e) {
+    if (e.target === modal) {
+      closeModal();
     }
   });
 
-  // 11. Навигация с клавиатуры
+  // 12. Навигация с клавиатуры
   document.addEventListener("keydown", function(e) {
     if (modal.style.display === "block") {
       if (e.key === "ArrowLeft") {
@@ -247,11 +259,50 @@ document.addEventListener("DOMContentLoaded", function() {
       } else if (e.key === "ArrowRight") {
         navigate(1);
       } else if (e.key === "Escape") {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
+        closeModal();
       }
     }
   });
+
+  // Функция настройки свайпа для галереи
+  function setupGallerySwipe() {
+    const sliderContainer = document.querySelector('.slider-container');
+    if (!sliderContainer) return;
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isSwiping = false;
+    
+    sliderContainer.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+      isSwiping = true;
+    }, { passive: true });
+    
+    sliderContainer.addEventListener('touchmove', function(e) {
+      if (isSwiping) {
+        touchEndX = e.changedTouches[0].screenX;
+      }
+    }, { passive: true });
+    
+    sliderContainer.addEventListener('touchend', function(e) {
+      if (!isSwiping) return;
+      
+      const swipeDistance = touchStartX - touchEndX;
+      const minSwipeDistance = 50;
+      
+      if (Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance > 0) {
+          navigate(1); // Свайп влево - следующее
+        } else {
+          navigate(-1); // Свайп вправо - предыдущее
+        }
+      }
+      
+      isSwiping = false;
+      touchStartX = 0;
+      touchEndX = 0;
+    }, { passive: true });
+  }
 
   // 12. Простая анимация появления карточек
   function animateCards() {

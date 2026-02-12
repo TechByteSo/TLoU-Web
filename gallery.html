@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Last of Us Part I | Галерея</title>
+  
+  <!-- Preload критических изображений -->
+  <link rel="preload" as="image" href="images/Background/Webp/BlackWall.webp">
+  <link rel="preload" as="image" href="images/Gallery/Webp/1.webp">
+  
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/stylegallery.css">
 </head>
@@ -11,12 +16,22 @@
   <!-- Шапка сайта -->
   <header class="main">
     <div class="mainLogo"><a href="index.html">THE LAST OF US PART I</a></div>
-    <nav class="mainMenu">
+    <button type="button" class="burger-btn" aria-label="Открыть меню" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="burger-overlay" aria-hidden="true"></div>
+    <nav class="mainMenu" aria-label="Главное меню">
       <ul>
         <li><a href="index.html">ГЛАВНАЯ</a></li>
         <li><a href="characters.html">ПЕРСОНАЖИ</a></li>
         <li><a href="gallery.html" class="active">ГАЛЕРЕЯ</a></li>
       </ul>
+      <div class="menu-social">
+        <a href="https://t.me/techbyteso" target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="menu-social-icon menu-social-icon-telegram"></a>
+        <a href="https://github.com/TechByteSo" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="menu-social-icon menu-social-icon-github"></a>
+      </div>
     </nav>
   </header>
 

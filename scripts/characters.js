@@ -88,15 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
-
-            const cards = entry.target.querySelectorAll(".character-card");
-            cards.forEach((card, index) => {
-              setTimeout(() => {
-                card.style.opacity = "1";
-                card.style.transform = "translateY(0)";
-              }, 150 * index);
-            });
-
             cardsObserver.unobserve(entry.target);
           }
         });
@@ -106,12 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const cardsContainer = document.querySelector(".characters-container");
     if (cardsContainer) {
-      document.querySelectorAll(".character-card").forEach((card) => {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(20px)";
-        card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-      });
-
       cardsObserver.observe(cardsContainer);
     }
   }
@@ -294,6 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function setupEventHandlers() {
     const prevBtn = document.querySelector(".prev-btn");
     const nextBtn = document.querySelector(".next-btn");
+    const slider = document.querySelector(".image-slider");
     
     if (prevBtn) {
       prevBtnHandler = () => changeImage("prev");
@@ -304,6 +290,50 @@ document.addEventListener("DOMContentLoaded", function () {
       nextBtnHandler = () => changeImage("next");
       nextBtn.addEventListener("click", nextBtnHandler);
     }
+    
+    // Добавляем свайп функциональность
+    if (slider) {
+      setupSwipe(slider);
+    }
+  }
+  
+  // Функция настройки свайпа
+  function setupSwipe(element) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isSwiping = false;
+    
+    element.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+      isSwiping = true;
+    }, { passive: true });
+    
+    element.addEventListener('touchmove', function(e) {
+      if (isSwiping) {
+        touchEndX = e.changedTouches[0].screenX;
+      }
+    }, { passive: true });
+    
+    element.addEventListener('touchend', function(e) {
+      if (!isSwiping) return;
+      
+      const swipeDistance = touchStartX - touchEndX;
+      const minSwipeDistance = 50; // Минимальное расстояние для свайпа
+      
+      if (Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance > 0) {
+          // Свайп влево - следующее изображение
+          changeImage("next");
+        } else {
+          // Свайп вправо - предыдущее изображение
+          changeImage("prev");
+        }
+      }
+      
+      isSwiping = false;
+      touchStartX = 0;
+      touchEndX = 0;
+    }, { passive: true });
   }
 
   // Функция смены изображения
