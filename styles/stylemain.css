@@ -2,7 +2,7 @@
 .intro {
   margin: 0;
   padding: var(--spacing-2xl) var(--spacing-container);
-  padding-top: calc(var(--spacing-2xl) + 60px);
+  padding-top: calc(var(--spacing-2xl) + 60px + 5vh);
   background-image: url(../images/Background/Webp/The\ Last\ of\ Us\ Part\ 1\ intro.webp);
   background-position: center 15%;
   background-repeat: no-repeat;
@@ -19,7 +19,20 @@
 
 @media (max-width: 768px) {
   .intro {
-    padding-top: calc(var(--spacing-2xl) + 50px);
+    padding-top: calc(var(--spacing-2xl) + 50px + 5vh);
+  }
+}
+
+/* iPhone SE и малые экраны: первый блок интро полностью виден (включая «крышу» рамки) */
+@media (max-width: 768px) and (max-height: 700px) {
+  .intro {
+    min-height: auto;
+    padding-top: calc(var(--spacing-lg) + 50px + 5vh);
+    padding-bottom: var(--spacing-lg);
+    justify-content: flex-start;
+  }
+  .intro-content {
+    margin-top: 0;
   }
 }
 
@@ -63,6 +76,12 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .intro-content {
+    gap: calc(var(--spacing-lg) / 2);
+  }
 }
 
 .Introduction {
@@ -111,6 +130,13 @@
   }
 }
 
+@media (max-width: 768px) {
+  .containerL, .containerR {
+    margin: calc(var(--spacing-sm) / 2) auto;
+    gap: calc(var(--spacing-xs) / 2);
+  }
+}
+
 .containerL.visible, .containerR.visible {
   opacity: 1;
   transform: translateY(0);
@@ -144,9 +170,9 @@
 .imageL, .imageR {
   width: 100%;
   height: 500px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
-  background: transparent;
+  background: var(--color-dark-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,7 +185,7 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-lg);
+  border-radius: inherit;
   overflow: hidden;
 }
 
@@ -167,9 +193,9 @@
 .imageR img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
-  border-radius: var(--radius-lg);
+  border-radius: inherit;
 }
 
 .textL, .textR {
@@ -232,7 +258,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-2xl);
   }
   
   .textL, .textR {
@@ -292,7 +318,7 @@
   
   .imageL, .imageR {
     height: 450px;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-2xl);
   }
 }
 
@@ -310,14 +336,14 @@
   
   .Introduction {
     font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-md);
-    padding-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
   }
   
   .containerL, .containerR {
-    margin: var(--spacing-md) auto;
-    padding: var(--spacing-md) var(--spacing-sm);
-    gap: var(--spacing-md);
+    margin: calc(var(--spacing-xs) / 2) auto;
+    padding: var(--spacing-sm);
+    gap: calc(var(--spacing-xs) / 2);
     grid-template-columns: 1fr;
   }
   
@@ -350,18 +376,18 @@
     height: auto;
     min-height: 300px;
     max-height: 400px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-xl);
   }
   
   .imageL picture,
   .imageR picture {
-    border-radius: var(--radius-md);
+    border-radius: inherit;
   }
   
   .imageL img,
   .imageR img {
-    border-radius: var(--radius-md);
-    object-fit: contain;
+    border-radius: inherit;
+    object-fit: cover;
   }
   
   .textL, .textR {
@@ -386,7 +412,7 @@
   
   .imageL, .imageR {
     height: 350px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-xl);
   }
   
   .textL, .textR {
@@ -395,12 +421,19 @@
   }
 }
 
+/* Телефоны: интро-изображение смещено вправо */
+@media (max-width: 768px) {
+  .intro {
+    background-position: 70% 15%;
+  }
+}
+
 /* ================= СПЕЦИФИЧЕСКИЕ УСТРОЙСТВА ================= */
 @media (max-width: 390px), 
        (min-width: 391px) and (max-width: 430px) and (max-height: 844px),
        (min-width: 700px) and (max-width: 730px) {
   .intro {
-    background-position: 30% 15%;
+    background-position: 75% 15%;
   }
 }
 

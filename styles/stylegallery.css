@@ -4,7 +4,7 @@
   grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
   gap: var(--spacing-lg);
   max-width: 1400px;
-  margin: var(--spacing-lg) auto;
+  margin: var(--spacing-md) auto;
   padding: 0 var(--spacing-container);
   opacity: 0;
   transform: translateY(40px);
@@ -120,10 +120,22 @@
 /* ================= ЗАГОЛОВОК ГАЛЕРЕИ ================= */
 .gallery-intro {
   text-align: center;
-  padding: var(--spacing-xl) var(--spacing-container) var(--spacing-lg);
+  padding: var(--spacing-xl) var(--spacing-container) var(--spacing-md);
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@media (max-width: 768px) {
+  .gallery-intro {
+    padding-top: var(--spacing-xl);
+    padding-left: var(--spacing-container);
+    padding-right: var(--spacing-container);
+    padding-bottom: var(--spacing-md);
+  }
+  .gallery-container {
+    margin-top: var(--spacing-md);
+  }
 }
 
 .gallery-intro h1 {
@@ -293,6 +305,7 @@
   justify-content: center;
   min-height: 50vh;
   max-height: calc(90vh - 120px);
+  touch-action: pan-y;
 }
 
 .slider-container picture {
