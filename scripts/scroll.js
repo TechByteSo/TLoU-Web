@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   // 3. Анимация контейнеров при скролле
-  const containers = document.querySelectorAll(".containerL, .containerR");
+  const containers = document.querySelectorAll(".content-block, .containerL, .containerR");
   
   if (containers.length > 0 && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver(

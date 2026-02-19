@@ -20,16 +20,19 @@ html {
 @font-face {
   font-family: "Oswald-Bold";
   src: url(../fonts/Oswald/static/Oswald-Bold.ttf);
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Roboto-Regular";
   src: url(../fonts/Roboto/Roboto-Regular.ttf);
+  font-display: swap;
 }
 
 @font-face {
   font-family: "The Last Of Us";
   src: url(../fonts/the-last-of-us/The\ Last\ Of\ Us.ttf);
+  font-display: swap;
 }
 
 /* ================= ДИЗАЙН-ТОКЕНЫ ================= */
@@ -92,6 +95,68 @@ html {
   --breakpoint-2xl: 1200px;
   --breakpoint-3xl: 1400px;
   --breakpoint-4k: 2000px;
+  
+  /* Главная: адаптивные отступы между секциями */
+  --main-container-margin-between: var(--spacing-md);
+  --main-container-gap-inner: var(--spacing-xl);
+  
+  /* Главная: адаптивные значения для интро (переопределяются в медиа) */
+  --intro-padding-top: clamp(60px, 8vh, 120px);
+  --intro-padding-bottom: var(--spacing-2xl);
+  --intro-min-height: clamp(70vh, 85vh, 90vh);
+  --intro-content-gap: var(--spacing-lg);
+  
+  /* Главная: адаптивные отступы контейнеров */
+  --container-margin-top: var(--spacing-2xl);
+  --container-margin-bottom: var(--spacing-2xl);
+  --container-padding-x: var(--spacing-container);
+  --container-gap: var(--spacing-xl);
+  
+  /* Header высота для safe area расчетов */
+  --header-height: 60px;
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+  :root {
+    --intro-padding-top: clamp(70px, 10vh, 100px);
+    --intro-padding-bottom: var(--spacing-lg);
+    --intro-min-height: clamp(60vh, 70vh, 75vh);
+    --intro-content-gap: calc(var(--spacing-lg) / 2);
+    --container-margin-top: calc(var(--spacing-lg) / 2);
+    --container-margin-bottom: calc(var(--spacing-lg) / 2);
+    --container-padding-x: var(--spacing-container);
+    --container-gap: var(--spacing-md);
+    --header-height: 50px;
+  }
+}
+
+/* Планшеты */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --intro-padding-top: clamp(60px, 3vh, 80px);
+    --intro-padding-bottom: var(--spacing-lg);
+    --intro-min-height: clamp(45vh, 50vh, 55vh);
+    --intro-content-gap: var(--spacing-lg);
+    --container-margin-top: calc(var(--spacing-md) / 2);
+    --container-margin-bottom: calc(var(--spacing-md) / 2);
+    --container-padding-x: var(--spacing-lg);
+    --container-gap: var(--spacing-md);
+  }
+}
+
+/* Десктоп */
+@media (min-width: 1025px) {
+  :root {
+    --intro-padding-top: clamp(80px, 10vh, 120px);
+    --intro-padding-bottom: var(--spacing-3xl);
+    --intro-min-height: clamp(85vh, 90vh, 95vh);
+    --intro-content-gap: var(--spacing-xl);
+    --container-margin-top: var(--spacing-2xl);
+    --container-margin-bottom: var(--spacing-2xl);
+    --container-padding-x: var(--spacing-container-lg);
+    --container-gap: var(--spacing-xl);
+  }
 }
 
 body {
@@ -108,13 +173,7 @@ body {
   width: 100%;
   max-width: 100vw;
   position: relative;
-  padding-top: 60px;
-}
-
-@media (max-width: 768px) {
-  body {
-    padding-top: 50px;
-  }
+  padding-top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
 }
 
 /* Оптимизация производительности: убираем fixed attachment на мобильных */

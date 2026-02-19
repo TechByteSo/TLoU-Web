@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const currentSpan = document.getElementById("currentImage");
   const totalSpan = document.getElementById("totalImages");
   const closeBtn = document.querySelector(".close-btn");
-  const downloadBtn = document.querySelector(".download-btn");
   const prevBtn = document.querySelector(".prev-btn");
   const nextBtn = document.querySelector(".next-btn");
   const galleryCards = document.querySelectorAll(".gallery-card");
@@ -139,100 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Добавляем свайп функциональность для галереи
   setupGallerySwipe();
 
-  // 8. Функция скачивания изображения
-  function downloadImage() {
-    const activePicture = sliderContainer.querySelector('picture.active');
-    if (!activePicture) return;
-    
-    const img = activePicture.querySelector('img');
-    if (!img) return;
-    
-    // Получаем URL изображения (приоритет WebP, fallback PNG)
-    const source = activePicture.querySelector('source');
-    let imageUrl = source ? source.srcset : img.src;
-    
-    // Определяем расширение файла
-    const isWebP = imageUrl.includes('.webp');
-    const extension = isWebP ? 'webp' : 'png';
-    const fileName = `screenshot-${currentIndex + 1}.${extension}`;
-    
-    // Если изображение уже загружено, используем canvas для гарантированного скачивания
-    if (img.complete && img.naturalWidth > 0) {
-      try {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        ctx.drawImage(img, 0, 0);
-        
-        canvas.toBlob((blob) => {
-          if (blob) {
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = fileName;
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            setTimeout(() => {
-              document.body.removeChild(link);
-              window.URL.revokeObjectURL(url);
-            }, 100);
-          } else {
-            // Fallback на прямую ссылку
-            downloadDirectLink(imageUrl, fileName);
-          }
-        }, `image/${extension}`, 1.0);
-      } catch (error) {
-        console.error('Ошибка при создании canvas:', error);
-        downloadDirectLink(imageUrl, fileName);
-      }
-    } else {
-      // Если изображение еще не загружено, используем fetch
-      fetch(imageUrl)
-        .then(response => {
-          if (!response.ok) throw new Error('Network response was not ok');
-          return response.blob();
-        })
-        .then(blob => {
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = fileName;
-          link.style.display = 'none';
-          document.body.appendChild(link);
-          link.click();
-          setTimeout(() => {
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
-          }, 100);
-        })
-        .catch(error => {
-          console.error('Ошибка при скачивании через fetch:', error);
-          downloadDirectLink(imageUrl, fileName);
-        });
-    }
-  }
-  
-  // Вспомогательная функция для прямого скачивания
-  function downloadDirectLink(imageUrl, fileName) {
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = fileName;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    setTimeout(() => {
-      document.body.removeChild(link);
-    }, 100);
-  }
-
-  // Обработчик кнопки скачивания
-  if (downloadBtn) {
-    downloadBtn.addEventListener("click", downloadImage);
-  }
-
-  // 9. Функция закрытия модального окна
+  // 8. Функция закрытия модального окна
   function closeModal() {
     modal.classList.remove("show");
     setTimeout(() => {

@@ -210,46 +210,6 @@
   opacity: 1;
 }
 
-.download-btn {
-  position: absolute;
-  right: 5.5rem;
-  top: var(--spacing-md);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-base);
-  font-weight: 300;
-  cursor: pointer;
-  z-index: 10;
-  width: 45px;
-  height: 45px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(30, 30, 30, 0.8);
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 0;
-}
-
-.download-btn:hover {
-  color: var(--color-text-primary);
-  background: rgba(255, 208, 96, 0.2);
-  border-color: var(--color-accent);
-  transform: scale(1.1);
-}
-
-.download-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-@media (min-width: 768px) {
-  .download-btn {
-    display: flex;
-  }
-}
-
 .close-btn {
   position: absolute;
   right: var(--spacing-md);
@@ -332,7 +292,9 @@
 .slider-container img {
   width: auto;
   max-width: 95%;
-  max-height: 80vh;
+  max-height: 85vh;
+  height: auto;
+  object-fit: contain;
   display: block;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-xl);
@@ -408,28 +370,187 @@
     margin: 1% auto;
     max-height: 95vh;
   }
+}
+
+/* Десктоп: полная пересборка лайтбокса галереи */
+@media (min-width: 1024px) {
+  #screenshotModal.modal.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+  }
   
-  .modal-body {
+  #screenshotModal .modal-content {
+    margin: 0 auto;
+    overflow: hidden;
+    max-height: 95vh;
+    padding: var(--spacing-md);
+    width: 95%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #screenshotModal .modal-body {
     max-height: calc(95vh - 100px);
+    overflow: hidden;
+    flex: 1 1 auto;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
-  .slider-container {
-    min-height: 50vh;
+  #screenshotModal .slider-container {
     max-height: calc(95vh - 100px);
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    min-height: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
-  .nav-btn {
-    width: 45px;
-    height: 45px;
-    font-size: var(--font-size-base);
+  #screenshotModal .slider-container picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
-  .prev-btn {
-    left: var(--spacing-sm);
+  #screenshotModal .slider-container picture.active {
+    position: absolute;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
   }
   
-  .next-btn {
-    right: var(--spacing-sm);
+  #screenshotModal .slider-container img {
+    max-width: 98%;
+    max-height: calc(95vh - 100px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+/* Планшеты: центрирование лайтбокса галереи */
+@media (min-width: 769px) and (max-width: 1023px) {
+  #screenshotModal.modal.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+  }
+  
+  #screenshotModal .modal-content {
+    margin: 0 auto;
+    width: 95%;
+    max-width: 900px;
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  #screenshotModal.modal.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  #screenshotModal .modal-content {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+  }
+  
+  #screenshotModal .modal-body {
+    padding: 0;
+    margin: 0;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    overflow: hidden;
+    height: calc(100vh - 60px);
+  }
+  
+  #screenshotModal .slider-container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  #screenshotModal .slider-container picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #screenshotModal .slider-container picture.active {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #screenshotModal .slider-container img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 60px);
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  #screenshotModal .nav-btn {
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+  }
+  
+  #screenshotModal .close-btn {
+    z-index: 10;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -470,13 +591,6 @@
     right: var(--spacing-sm);
     top: var(--spacing-sm);
     font-size: var(--font-size-md);
-    width: 40px;
-    height: 40px;
-  }
-  
-  .download-btn {
-    right: calc(var(--spacing-sm) + 50px);
-    top: var(--spacing-sm);
     width: 40px;
     height: 40px;
   }

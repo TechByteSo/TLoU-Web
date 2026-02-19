@@ -1,46 +1,30 @@
+/* ================= ГЛАВНАЯ — СТРАНИЦА INDEX =================
+ * Консолидированные брейкпоинты:
+ * - Мобильный: < 768px
+ * - Планшет: 769px - 1024px
+ * - Десктоп: 1025px - 1366px
+ * - Широкий: > 1367px
+ * 
+ * Используются CSS переменные из style.css для адаптивных значений
+ * ============================================================ */
+
 /* ================= СЕКЦИЯ ВВЕДЕНИЯ ================= */
 .intro {
   margin: 0;
-  padding: var(--spacing-2xl) var(--spacing-container);
-  padding-top: calc(var(--spacing-2xl) + 60px + 5vh);
+  padding: var(--intro-padding-bottom) var(--spacing-container);
+  padding-top: calc(var(--intro-padding-top) + var(--header-height) + env(safe-area-inset-top, 0px));
   background-image: url(../images/Background/Webp/The\ Last\ of\ Us\ Part\ 1\ intro.webp);
-  background-position: center 15%;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  background-position: 60% center;
   position: relative;
-  min-height: 85vh;
+  min-height: var(--intro-min-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .intro {
-    padding-top: calc(var(--spacing-2xl) + 50px + 5vh);
-  }
-}
-
-/* iPhone SE и малые экраны: первый блок интро полностью виден (включая «крышу» рамки) */
-@media (max-width: 768px) and (max-height: 700px) {
-  .intro {
-    min-height: auto;
-    padding-top: calc(var(--spacing-lg) + 50px + 5vh);
-    padding-bottom: var(--spacing-lg);
-    justify-content: flex-start;
-  }
-  .intro-content {
-    margin-top: 0;
-  }
-}
-
-/* Оптимизация производительности: убираем fixed attachment на мобильных */
-@media (max-width: 768px) {
-  .intro {
-    background-attachment: scroll;
-  }
 }
 
 /* Затемнение фона для лучшей читаемости */
@@ -75,13 +59,7 @@
   animation: fadeInUp 1s ease-out;
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
-}
-
-@media (max-width: 768px) {
-  .intro-content {
-    gap: calc(var(--spacing-lg) / 2);
-  }
+  gap: var(--intro-content-gap);
 }
 
 .Introduction {
@@ -108,12 +86,15 @@
 }
 
 /* ================= КОНТЕЙНЕРЫ С КОНТЕНТОМ ================= */
-.containerL, .containerR {
-  margin: var(--spacing-2xl) auto;
-  padding: 0 var(--spacing-container);
+/* Общий класс для контейнеров (можно использовать вместо containerL/R) */
+.content-block,
+.containerL, 
+.containerR {
+  margin: var(--container-margin-top) auto;
+  padding: 0 var(--container-padding-x);
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-xl);
+  gap: var(--container-gap);
   max-width: 1400px;
   width: 100%;
   opacity: 0;
@@ -122,27 +103,27 @@
               transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Уменьшаем отступы на планшетах и мобильных */
-@media (max-width: 1023px) {
-  .containerL, .containerR {
-    margin: var(--spacing-lg) auto;
-    gap: var(--spacing-md);
-  }
-}
-
-@media (max-width: 768px) {
-  .containerL, .containerR {
-    margin: calc(var(--spacing-sm) / 2) auto;
-    gap: calc(var(--spacing-xs) / 2);
-  }
-}
-
-.containerL.visible, .containerR.visible {
+.content-block.visible,
+.containerL.visible, 
+.containerR.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.containerL h2, .containerR h2 {
+/* Отступы между контейнерами */
+.content-block:not(:last-child),
+.containerL {
+  margin-bottom: var(--main-container-margin-between);
+}
+
+.content-block:not(:first-child),
+.containerR {
+  margin-top: var(--main-container-margin-between);
+}
+
+.content-block h2,
+.containerL h2, 
+.containerR h2 {
   color: var(--color-accent);
   font-size: var(--font-size-xl);
   text-align: left;
@@ -156,6 +137,7 @@
 }
 
 /* Подчеркивание заголовков */
+.content-block h2::after,
 .containerL h2::after,
 .containerR h2::after {
   content: '';
@@ -167,28 +149,31 @@
   background: linear-gradient(90deg, var(--color-accent), transparent);
 }
 
-.imageL, .imageR {
+/* Изображения: только прямоугольник со скруглением */
+.content-block .content-image,
+.imageL, 
+.imageR {
   width: 100%;
-  height: 500px;
+  height: clamp(350px, 50vh, 500px);
   border-radius: var(--radius-2xl);
   overflow: hidden;
-  background: var(--color-dark-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: transparent;
+  display: block;
+  border: none;
+  box-shadow: none;
 }
 
+.content-block .content-image picture,
 .imageL picture,
 .imageR picture {
-  display: flex;
+  display: block;
   width: 100%;
   height: 100%;
-  align-items: center;
-  justify-content: center;
   border-radius: inherit;
   overflow: hidden;
 }
 
+.content-block .content-image img,
 .imageL img,
 .imageR img {
   width: 100%;
@@ -196,9 +181,13 @@
   object-fit: cover;
   display: block;
   border-radius: inherit;
+  border: none;
 }
 
-.textL, .textR {
+/* Текстовые блоки */
+.content-block .content-text,
+.textL, 
+.textR {
   font-size: var(--font-size-base);
   font-family: "Roboto-Regular", sans-serif;
   color: var(--color-text-secondary);
@@ -214,140 +203,106 @@
   max-width: 100%;
 }
 
-.textL:hover, .textR:hover {
+.content-block .content-text:hover,
+.textL:hover, 
+.textR:hover {
   box-shadow: var(--shadow-xl);
   border-color: var(--color-border-hover);
   transform: translateY(-2px);
   background: linear-gradient(135deg, rgba(35, 35, 35, 0.95) 0%, rgba(25, 25, 25, 0.95) 100%);
 }
 
-/* ================= УНИФИЦИРОВАННЫЕ БРЕЙКПОИНТЫ ================= */
-/* Десктоп и выше */
-@media (min-width: 1024px) {
+/* ================= МОБИЛЬНЫЕ УСТРОЙСТВА (< 768px) ================= */
+@media (max-width: 768px) {
   .intro {
-    padding: var(--spacing-3xl) var(--spacing-container-lg);
-    min-height: 90vh;
-    background-position: center 15%;
-  }
-  
-  .intro-content {
-    padding: var(--spacing-2xl) var(--spacing-container-lg);
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl);
-    align-items: center;
-  }
-  
-  .Introduction {
-    grid-column: 1;
-  }
-  
-  .IntroText {
-    grid-column: 2;
-  }
-  
-  .containerL, .containerR {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl);
-    padding: 0 var(--spacing-container-lg);
-    align-items: stretch;
-  }
-  
-  .imageL, .imageR {
-    width: 100%;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-2xl);
-  }
-  
-  .textL, .textR {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  
-  .containerL h2, .containerR h2 {
-    text-align: left;
-  }
-  
-  .containerL h2::after,
-  .containerR h2::after {
-    left: 0;
-    transform: none;
-  }
-}
-
-/* ================= АДАПТИВ ДЛЯ 2K И 4K ЭКРАНОВ ================= */
-@media (min-width: 2000px) {
-  .intro {
-    min-height: 95vh;
-    padding: calc(var(--spacing-3xl) + var(--spacing-sm)) var(--spacing-2xl);
-  }
-  
-  .containerL, .containerR {
-    max-width: 1800px;
-    gap: var(--spacing-3xl);
-    padding: var(--spacing-3xl) var(--spacing-2xl);
-  }
-  
-  .textL, .textR {
-    font-size: 1.4rem;
-    padding: calc(var(--spacing-lg) + var(--spacing-xs));
-  }
-}
-
-/* ================= АДАПТИВ ДЛЯ ПЛАНШЕТОВ ================= */
-@media (max-width: 1023px) and (min-width: 769px) {
-  .intro {
-    padding: var(--spacing-xl) var(--spacing-lg);
-    min-height: 75vh;
-  }
-  
-  .intro-content {
-    padding: calc(var(--spacing-lg) + var(--spacing-xs));
-    grid-template-columns: 1fr;
-  }
-  
-  .containerL, .containerR {
-    margin: var(--spacing-md) auto;
-    padding: var(--spacing-md) var(--spacing-lg);
-    gap: var(--spacing-md);
-  }
-  
-  .imageL, .imageR {
-    height: 450px;
-    border-radius: var(--radius-2xl);
-  }
-}
-
-/* ================= АДАПТИВ ДЛЯ МОБИЛЬНЫХ ================= */
-@media (max-width: 480px) {
-  .intro {
-    padding: var(--spacing-lg) var(--spacing-sm);
-    min-height: 70vh;
     background-attachment: scroll;
+    background-position: 60% center;
   }
   
   .intro-content {
     padding: var(--spacing-lg) var(--spacing-md);
+    align-items: center;
+    justify-content: center;
   }
   
-  .Introduction {
-    font-size: var(--font-size-lg);
+  /* Маленькие телефоны: интро ниже header */
+  @media (max-width: 390px) {
+    .intro {
+      padding-top: calc(72px + 7vh + var(--spacing-lg) + env(safe-area-inset-top, 0px));
+    }
+  }
+  
+  /* Низкие экраны */
+  @media (max-height: 700px) {
+    .intro {
+      min-height: auto;
+      padding-top: calc(70px + 6vh + var(--spacing-lg) + env(safe-area-inset-top, 0px));
+      padding-bottom: var(--spacing-lg);
+      justify-content: flex-start;
+    }
+    .intro-content {
+      margin-top: 0;
+    }
+  }
+  
+  .content-block,
+  .containerL, 
+  .containerR {
+    margin-top: calc(var(--spacing-sm) / 2);
     margin-bottom: var(--spacing-sm);
-    padding-bottom: var(--spacing-sm);
-  }
-  
-  .containerL, .containerR {
-    margin: calc(var(--spacing-xs) / 2) auto;
     padding: var(--spacing-sm);
-    gap: calc(var(--spacing-xs) / 2);
+    gap: calc(var(--spacing-xs) * 0.2);
     grid-template-columns: 1fr;
   }
   
-  /* Чередование контента: фото-текст */
+  /* Переопределение стилей для изображений на главной странице на мобилках */
+  .content-block .content-image,
+  .imageL,
+  .imageR {
+    margin-bottom: calc(var(--spacing-xs) * 0.75) !important;
+    padding-bottom: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    display: block !important;
+  }
+  
+  .content-block .content-image picture,
+  .imageL picture,
+  .imageR picture {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+  
+  .content-block .content-image img,
+  .imageL img,
+  .imageR img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: clamp(300px, 40vh, 400px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+    display: block !important;
+    border-radius: inherit;
+  }
+  
+  .content-block:not(:last-child),
+  .containerL {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .content-block:not(:first-child),
+  .containerR {
+    margin-top: var(--spacing-sm);
+  }
+  
+  /* Чередование контента на мобильных */
   .containerL {
     order: 1;
   }
@@ -372,87 +327,287 @@
     order: 2;
   }
   
-  .imageL, .imageR {
-    height: auto;
-    min-height: 300px;
-    max-height: 400px;
-    border-radius: var(--radius-xl);
-  }
+  /* Удалены дублирующиеся стили - используются стили выше с !important */
   
-  .imageL picture,
-  .imageR picture {
-    border-radius: inherit;
-  }
-  
-  .imageL img,
-  .imageR img {
-    border-radius: inherit;
-    object-fit: cover;
-  }
-  
-  .textL, .textR {
-    padding: var(--spacing-md);
+  .content-block .content-text,
+  .textL, 
+  .textR {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm) var(--spacing-md);
     font-size: var(--font-size-sm);
+  }
+  
+  /* Очень маленькие экраны */
+  @media (max-width: 360px) {
+    .intro {
+      padding: var(--spacing-md) var(--spacing-xs);
+    }
+    
+    .intro-content {
+      padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .content-block,
+    .containerL, 
+    .containerR {
+      padding: var(--spacing-md) var(--spacing-xs);
+      gap: var(--spacing-sm);
+    }
+    
+    .content-block:not(:last-child),
+    .containerL {
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .content-block:not(:first-child),
+    .containerR {
+      margin-top: var(--spacing-xs);
+    }
+    
+    .content-block .content-image,
+    .imageL, 
+    .imageR {
+      height: 350px;
+      border-radius: var(--radius-xl);
+    }
+    
+    .content-block .content-text,
+    .textL, 
+    .textR {
+      padding: calc(var(--spacing-sm) + var(--spacing-xs)) calc(var(--spacing-sm) + var(--spacing-xs)) var(--spacing-sm) calc(var(--spacing-sm) + var(--spacing-xs));
+      font-size: var(--font-size-xs);
+    }
   }
 }
 
-/* ================= АДАПТИВ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ================= */
-@media (max-width: 360px) {
+/* ================= ПЛАНШЕТЫ (769px - 1024px) ================= */
+@media (min-width: 769px) and (max-width: 1024px) {
   .intro {
-    padding: var(--spacing-md) var(--spacing-xs);
+    padding: var(--spacing-lg) var(--spacing-lg);
+    padding-top: calc(60px + 2.5vh + var(--spacing-sm) + env(safe-area-inset-top, 0px));
+    padding-bottom: var(--spacing-lg);
+    min-height: 46vh;
+    background-position: 60% center;
+    background-attachment: scroll;
+  }
+  
+  /* Портретная ориентация планшетов */
+  @media (orientation: portrait) {
+    .intro {
+      min-height: clamp(40vh, 50vh, 55vh);
+      padding-top: calc(60px + 2vh + var(--spacing-sm) + env(safe-area-inset-top, 0px));
+    }
+  }
+  
+  /* Альбомная ориентация планшетов */
+  @media (orientation: landscape) {
+    .intro {
+      min-height: clamp(50vh, 60vh, 65vh);
+      padding-top: calc(60px + 3vh + var(--spacing-md) + env(safe-area-inset-top, 0px));
+    }
   }
   
   .intro-content {
-    padding: var(--spacing-md) var(--spacing-sm);
+    padding: calc(var(--spacing-lg) + var(--spacing-xs));
+    grid-template-columns: 1fr;
   }
   
-  .containerL, .containerR {
-    padding: var(--spacing-md) var(--spacing-xs);
+  .content-block,
+  .containerL, 
+  .containerR {
+    margin-top: calc(var(--spacing-md) / 2);
+    margin-bottom: calc(var(--spacing-md) / 2);
+    padding: var(--spacing-md) var(--spacing-lg);
+    gap: var(--spacing-md);
+    grid-template-columns: 1fr;
   }
   
-  .imageL, .imageR {
-    height: 350px;
-    border-radius: var(--radius-xl);
+  .content-block:not(:last-child),
+  .containerL {
+    margin-bottom: calc(var(--spacing-sm) / 1.5);
   }
   
-  .textL, .textR {
-    padding: calc(var(--spacing-sm) + var(--spacing-xs));
-    font-size: var(--font-size-xs);
+  .content-block:not(:first-child),
+  .containerR {
+    margin-top: calc(var(--spacing-sm) / 1.5);
+  }
+  
+  .content-block .content-image,
+  .imageL, 
+  .imageR {
+    height: 450px;
+    border-radius: var(--radius-2xl);
   }
 }
 
-/* Телефоны: интро-изображение смещено вправо */
-@media (max-width: 768px) {
-  .intro {
-    background-position: 70% 15%;
-  }
-}
-
-/* ================= СПЕЦИФИЧЕСКИЕ УСТРОЙСТВА ================= */
-@media (max-width: 390px), 
-       (min-width: 391px) and (max-width: 430px) and (max-height: 844px),
-       (min-width: 700px) and (max-width: 730px) {
-  .intro {
-    background-position: 75% 15%;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1366px) {
+/* ================= ДЕСКТОП (1025px - 1366px) ================= */
+@media (min-width: 1025px) and (max-width: 1366px) {
   .intro {
     min-height: 80vh;
+    background-position: 60% 50%;
   }
   
-  .containerL, .containerR {
+  .intro-content {
+    padding: var(--spacing-2xl) var(--spacing-container-lg);
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+  
+  .Introduction {
+    grid-column: 1;
+  }
+  
+  .IntroText {
+    grid-column: 2;
+  }
+  
+  .content-block,
+  .containerL, 
+  .containerR {
     grid-template-columns: 1fr;
-    gap: calc(var(--spacing-lg) + var(--spacing-xs));
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-container-lg);
+  }
+  
+  .content-block:not(:last-child),
+  .containerL {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .content-block:not(:first-child),
+  .containerR {
+    margin-top: var(--spacing-sm);
+  }
+  
+  .content-block .content-image,
+  .imageL, 
+  .imageR {
+    height: 450px;
+    border-radius: var(--radius-2xl);
+  }
+  
+  .content-block .content-text,
+  .textL, 
+  .textR {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .content-block h2,
+  .containerL h2, 
+  .containerR h2 {
+    text-align: left;
+  }
+  
+  .content-block h2::after,
+  .containerL h2::after,
+  .containerR h2::after {
+    left: 0;
+    transform: none;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px),
-       (min-width: 540px) and (max-width: 720px),
-       (min-width: 1104px) and (max-width: 1378px) {
-  .containerL, .containerR {
-    margin: var(--spacing-xl) auto;
-    gap: var(--spacing-lg);
+/* ================= ШИРОКИЙ ДЕСКТОП (> 1367px) ================= */
+@media (min-width: 1367px) {
+  .intro {
+    padding: var(--spacing-3xl) var(--spacing-container-lg);
+    min-height: 90vh;
+    background-position: 60% 50%;
+  }
+  
+  .intro-content {
+    padding: var(--spacing-2xl) var(--spacing-container-lg);
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+  
+  .Introduction {
+    grid-column: 1;
+  }
+  
+  .IntroText {
+    grid-column: 2;
+  }
+  
+  .content-block,
+  .containerL, 
+  .containerR {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-container-lg);
+    align-items: stretch;
+  }
+  
+  .content-block:not(:last-child),
+  .containerL {
+    margin-bottom: calc(var(--spacing-md) * 1.5);
+  }
+  
+  .content-block:not(:first-child),
+  .containerR {
+    margin-top: calc(var(--spacing-md) * 1.5);
+  }
+  
+  .content-block .content-image,
+  .imageL, 
+  .imageR {
+    width: 100%;
+    height: 450px;
+    display: block;
+    border-radius: var(--radius-2xl);
+  }
+  
+  .content-block .content-image img,
+  .imageL img,
+  .imageR img {
+    object-fit: cover;
+  }
+  
+  .content-block .content-text,
+  .textL, 
+  .textR {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .content-block h2,
+  .containerL h2, 
+  .containerR h2 {
+    text-align: left;
+  }
+  
+  .content-block h2::after,
+  .containerL h2::after,
+  .containerR h2::after {
+    left: 0;
+    transform: none;
+  }
+}
+
+/* ================= ОЧЕНЬ ШИРОКИЕ ЭКРАНЫ (2K, 4K) ================= */
+@media (min-width: 2000px) {
+  .intro {
+    min-height: 95vh;
+    padding: calc(var(--spacing-3xl) + var(--spacing-sm)) var(--spacing-2xl);
+  }
+  
+  .content-block,
+  .containerL, 
+  .containerR {
+    max-width: 1800px;
+    gap: var(--spacing-3xl);
+    padding: var(--spacing-3xl) var(--spacing-2xl);
+  }
+  
+  .content-block .content-text,
+  .textL, 
+  .textR {
+    font-size: 1.4rem;
+    padding: calc(var(--spacing-lg) + var(--spacing-xs));
   }
 }

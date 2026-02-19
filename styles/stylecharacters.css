@@ -1,8 +1,3 @@
-/* ================= ОСНОВНЫЕ НАСТРОЙКИ ================= */
-html {
-  scroll-behavior: smooth;
-}
-
 /* ================= ЗАГОЛОВОК СТРАНИЦЫ (КАК В ГАЛЕРЕЕ) ================= */
 .characters-intro {
   text-align: center;
@@ -271,7 +266,7 @@ html {
   width: auto;
   min-width: 280px;
   max-width: 500px;
-  height: 550px;
+  height: 580px;
   overflow: hidden;
   flex-shrink: 0;
   border-radius: var(--radius-lg);
@@ -314,6 +309,7 @@ html {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
   display: block;
 }
 
@@ -442,6 +438,87 @@ html {
   color: var(--color-text-secondary);
 }
 
+/* ================= АДАПТИВ ДЛЯ ПЛАНШЕТОВ ================= */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .characters-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+    justify-items: center;
+  }
+  
+  .character-card {
+    max-width: 320px;
+    min-width: 220px;
+    width: 100%;
+  }
+  
+  .character-card:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 320px;
+  }
+  
+  .character-image-container picture,
+  .character-image {
+    height: 340px;
+  }
+  
+  .modal-content {
+    width: 95%;
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+  }
+  
+  .modal-body {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .image-container {
+    width: 100%;
+    max-width: 400px;
+    min-width: auto;
+    height: 420px;
+    margin: 0 auto;
+  }
+  
+  .modal-image {
+    object-fit: cover;
+    object-position: center 25%;
+  }
+  
+  /* Центрирование лайтбокса на планшетах (как в Галерее) */
+  #characterModal.modal.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+  }
+  
+  #characterModal .modal-content {
+    margin: 0 auto;
+  }
+  
+  .modal-text {
+    max-height: 400px;
+  }
+  
+  .nav-btn {
+    width: 44px;
+    height: 44px;
+    font-size: var(--font-size-base);
+  }
+  
+  .prev-btn {
+    left: var(--spacing-sm);
+  }
+  
+  .next-btn {
+    right: var(--spacing-sm);
+  }
+}
+
 /* ================= УНИФИЦИРОВАННЫЕ БРЕЙКПОИНТЫ ================= */
 @media (max-width: 992px) {
   .modal-content {
@@ -487,6 +564,20 @@ html {
   .characters-container {
     margin-top: var(--spacing-md);
   }
+  
+  /* Центрирование лайтбокса персонажей на мобильных */
+  #characterModal.modal.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm);
+  }
+  
+  #characterModal .modal-content {
+    margin: 0 auto;
+    width: 95%;
+  }
+  
   .character-card {
     max-width: 256px;
     min-width: 224px;
