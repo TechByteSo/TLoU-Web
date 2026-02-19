@@ -61,6 +61,15 @@ document.addEventListener("DOMContentLoaded", function() {
       img.style.objectFit = 'contain';
       img.style.display = 'block';
       
+      // Обработка ошибок загрузки изображений
+      img.addEventListener('error', function() {
+        console.error(`Ошибка загрузки изображения ${index + 1}:`, this.src);
+        // Если fallback тоже не загрузился, показываем placeholder
+        this.onerror = null;
+        this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%23333" width="800" height="600"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" text-anchor="middle" dy=".3em" font-size="24"%3EИзображение не загружено%3C/text%3E%3C/svg%3E';
+        this.alt = `Ошибка загрузки скриншота ${index + 1}`;
+      });
+      
       picture.appendChild(source);
       picture.appendChild(img);
       sliderContainer.appendChild(picture);
@@ -114,6 +123,31 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 10);
   }
 
+  // Функция предзагрузки изображений
+  function preloadImage(src) {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    document.head.appendChild(link);
+  }
+  
+  // Предзагрузка следующего и предыдущего изображения
+  function preloadAdjacentImages() {
+    const nextIndex = (currentIndex + 1) % screenshots.length;
+    const prevIndex = (currentIndex - 1 + screenshots.length) % screenshots.length;
+    
+    // Предзагружаем следующее изображение
+    if (screenshots[nextIndex]) {
+      preloadImage(screenshots[nextIndex]);
+    }
+    
+    // Предзагружаем предыдущее изображение
+    if (screenshots[prevIndex]) {
+      preloadImage(screenshots[prevIndex]);
+    }
+  }
+
   // 4. Обновление состояния слайдера с анимацией
   function updateSlider() {
     const pictures = sliderContainer.querySelectorAll('picture');
@@ -144,6 +178,9 @@ document.addEventListener("DOMContentLoaded", function() {
     if (currentSpan) {
       currentSpan.textContent = currentIndex + 1;
     }
+    
+    // Предзагружаем соседние изображения
+    preloadAdjacentImages();
     
     // Показываем кнопки при смене изображения
     showControls();
