@@ -36,6 +36,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // Переменные состояния
   let currentIndex = 0;
   let modalImages = [];
+  let hideControlsTimeout = null;
+  const HIDE_CONTROLS_DELAY = 3000; // 3 секунды до скрытия кнопок
 
   // 2. Инициализация слайдера
   function initSlider() {
@@ -69,6 +71,27 @@ document.addEventListener("DOMContentLoaded", function() {
     updateSlider();
   }
 
+  // Функция показа кнопок управления
+  function showControls() {
+    modal.classList.remove("hide-controls");
+    resetHideControlsTimer();
+  }
+  
+  // Функция скрытия кнопок управления
+  function hideControls() {
+    modal.classList.add("hide-controls");
+  }
+  
+  // Сброс таймера скрытия кнопок
+  function resetHideControlsTimer() {
+    if (hideControlsTimeout) {
+      clearTimeout(hideControlsTimeout);
+    }
+    hideControlsTimeout = setTimeout(() => {
+      hideControls();
+    }, HIDE_CONTROLS_DELAY);
+  }
+  
   // 3. Функция открытия модального окна
   function openModal(index) {
     if (index < 0 || index >= screenshots.length) return;
@@ -87,31 +110,43 @@ document.addEventListener("DOMContentLoaded", function() {
     
     setTimeout(() => {
       modal.classList.add("show");
+      showControls();
     }, 10);
   }
 
-  // 4. Обновление состояния слайдера
+  // 4. Обновление состояния слайдера с анимацией
   function updateSlider() {
     const pictures = sliderContainer.querySelectorAll('picture');
     if (pictures.length === 0) return;
     
+    // Определяем направление смены для анимации
+    const prevActiveIndex = Array.from(pictures).findIndex(p => p.classList.contains('active'));
+    const direction = currentIndex > prevActiveIndex ? 1 : -1;
+    
     pictures.forEach((picture, index) => {
       if (index === currentIndex) {
+        // Убираем inline стили, чтобы работали CSS transitions
+        picture.style.opacity = '';
+        picture.style.visibility = '';
+        picture.style.zIndex = '';
+        picture.style.transform = '';
         picture.classList.add('active');
-        picture.style.opacity = '1';
-        picture.style.visibility = 'visible';
-        picture.style.zIndex = '1';
       } else {
+        // Убираем inline стили для плавной анимации
+        picture.style.opacity = '';
+        picture.style.visibility = '';
+        picture.style.zIndex = '';
+        picture.style.transform = '';
         picture.classList.remove('active');
-        picture.style.opacity = '0';
-        picture.style.visibility = 'hidden';
-        picture.style.zIndex = '0';
       }
     });
     
     if (currentSpan) {
       currentSpan.textContent = currentIndex + 1;
     }
+    
+    // Показываем кнопки при смене изображения
+    showControls();
   }
 
   // 5. Навигация между изображениями
@@ -132,15 +167,75 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // 7. Обработчики для кнопок навигации
-  prevBtn.addEventListener("click", () => navigate(-1));
-  nextBtn.addEventListener("click", () => navigate(1));
+  prevBtn.addEventListener("click", () => {
+    navigate(-1);
+    showControls();
+  });
+  nextBtn.addEventListener("click", () => {
+    navigate(1);
+    showControls();
+  });
   
   // Добавляем свайп функциональность для галереи
   setupGallerySwipe();
+  
+  // Обработчики для показа кнопок при взаимодействии (только на мобилках)
+  function setupMobileControls() {
+    // При touch показываем кнопки
+    modal.addEventListener('touchstart', function(e) {
+      if (modal.style.display === "block") {
+        showControls();
+      }
+    }, { passive: true });
+    
+    modal.addEventListener('touchmove', function(e) {
+      if (modal.style.display === "block") {
+        showControls();
+      }
+    }, { passive: true });
+    
+    modal.addEventListener('touchend', function(e) {
+      if (modal.style.display === "block") {
+        showControls();
+      }
+    }, { passive: true });
+    
+    // При движении мыши показываем кнопки (для устройств с мышью)
+    modal.addEventListener('mousemove', function(e) {
+      if (modal.style.display === "block") {
+        showControls();
+      }
+    });
+    
+    // При клике на модальное окно показываем кнопки
+    modal.addEventListener('click', function(e) {
+      if (modal.style.display === "block" && (e.target === modal || e.target === sliderContainer)) {
+        showControls();
+      }
+    });
+  }
+  
+  // Инициализируем обработчики для мобилок
+  if (window.innerWidth <= 768) {
+    setupMobileControls();
+  }
+  
+  // Также проверяем при изменении размера окна
+  window.addEventListener('resize', function() {
+    if (window.innerWidth <= 768 && !modal.hasAttribute('data-mobile-controls-setup')) {
+      setupMobileControls();
+      modal.setAttribute('data-mobile-controls-setup', 'true');
+    }
+  });
 
   // 8. Функция закрытия модального окна
   function closeModal() {
+    if (hideControlsTimeout) {
+      clearTimeout(hideControlsTimeout);
+      hideControlsTimeout = null;
+    }
     modal.classList.remove("show");
+    modal.classList.remove("hide-controls");
     setTimeout(() => {
       modal.style.display = "none";
       document.body.style.overflow = "auto";
@@ -182,11 +277,13 @@ document.addEventListener("DOMContentLoaded", function() {
     sliderContainer.addEventListener('touchstart', function(e) {
       touchStartX = e.changedTouches[0].screenX;
       isSwiping = true;
+      showControls(); // Показываем кнопки при начале свайпа
     }, { passive: true });
     
     sliderContainer.addEventListener('touchmove', function(e) {
       if (isSwiping) {
         touchEndX = e.changedTouches[0].screenX;
+        showControls(); // Показываем кнопки при движении
       }
     }, { passive: true });
     
@@ -204,6 +301,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       }
       
+      showControls(); // Показываем кнопки после свайпа
       isSwiping = false;
       touchStartX = 0;
       touchEndX = 0;
