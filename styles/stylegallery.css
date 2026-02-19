@@ -372,47 +372,45 @@
   }
 }
 
-/* Десктоп: полная пересборка лайтбокса галереи */
+/* Десктоп: полная пересборка лайтбокса галереи (обтекающий фон как у персонажей) */
 @media (min-width: 1024px) {
   #screenshotModal.modal.show {
     display: flex !important;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
   }
   
   #screenshotModal .modal-content {
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     max-height: 95vh;
-    padding: var(--spacing-md);
-    width: 95%;
-    max-width: 1400px;
-    display: flex;
-    flex-direction: column;
+    padding: var(--spacing-lg);
+    width: auto;
+    max-width: 95vw;
+    display: inline-block;
+    position: relative;
   }
   
   #screenshotModal .modal-body {
-    max-height: calc(95vh - 100px);
-    overflow: hidden;
-    flex: 1 1 auto;
+    max-height: 90vh;
+    overflow: visible;
     padding: 0;
     margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    position: relative;
+    width: auto;
+    height: auto;
   }
   
   #screenshotModal .slider-container {
-    max-height: calc(95vh - 100px);
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
+    max-height: 85vh;
+    overflow: visible;
+    height: auto;
+    width: auto;
     min-height: 0;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
   }
   
   #screenshotModal .slider-container picture {
@@ -423,26 +421,50 @@
     height: 100%;
     padding: 0;
     margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
   }
   
   #screenshotModal .slider-container picture.active {
-    position: absolute;
+    position: relative;
     z-index: 1;
     padding: 0;
     margin: 0;
+    opacity: 1;
+    visibility: visible;
+    display: block;
+    width: auto;
+    height: auto;
   }
   
-  #screenshotModal .slider-container img {
-    max-width: 98%;
-    max-height: calc(95vh - 100px);
+  #screenshotModal .slider-container picture.active img {
+    max-width: 85vw;
+    max-height: 85vh;
     width: auto;
     height: auto;
     object-fit: contain;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
     display: block;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    border: 2px solid var(--color-border);
+  }
+  
+  #screenshotModal .nav-btn {
+    z-index: 10;
+    position: absolute;
+  }
+  
+  #screenshotModal .close-btn {
+    z-index: 10;
+    position: absolute;
+  }
+  
+  #screenshotModal .image-counter {
+    z-index: 10;
+    position: absolute;
   }
 }
 
