@@ -468,11 +468,15 @@
   .modal-content {
     width: 95%;
     padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+    padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 40px);
   }
   
   .modal-body {
     flex-direction: column;
     gap: var(--spacing-md);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 140px);
+    overflow-y: auto;
   }
   
   .image-container {
@@ -494,6 +498,7 @@
     align-items: center;
     justify-content: center;
     padding: var(--spacing-lg);
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
   }
   
   #characterModal .modal-content {
@@ -501,7 +506,8 @@
   }
   
   .modal-text {
-    max-height: 400px;
+    max-height: calc(50dvh - env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
   }
   
   .nav-btn {
@@ -524,11 +530,14 @@
   .modal-content {
     width: 95%;
     padding: calc(var(--spacing-lg) + var(--spacing-xs)) var(--spacing-md) var(--spacing-lg);
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
   }
   
   .modal-body {
     flex-direction: column;
     gap: var(--spacing-lg);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 120px);
+    overflow-y: auto;
   }
   
   .image-container {
@@ -550,7 +559,8 @@
   }
   
   .modal-text {
-    max-height: none;
+    max-height: calc(50dvh - env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
   }
   
   .character-card {
@@ -571,11 +581,24 @@
     align-items: center;
     justify-content: center;
     padding: var(--spacing-sm);
+    padding-bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom, 0px));
   }
   
   #characterModal .modal-content {
     margin: 0 auto;
     width: 95%;
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 20px);
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
+  }
+  
+  #characterModal .modal-body {
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 150px);
+    overflow-y: auto;
+  }
+  
+  #characterModal .modal-text {
+    max-height: calc(50dvh - env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
   }
   
   .character-card {
@@ -598,8 +621,20 @@
   
   .modal-content {
     padding: var(--spacing-lg) var(--spacing-sm) var(--spacing-md);
+    padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom, 0px));
     width: 98%;
     margin: 5% auto;
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 10px);
+  }
+  
+  .modal-body {
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 140px);
+    overflow-y: auto;
+  }
+  
+  .modal-text {
+    max-height: calc(45dvh - env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
   }
   
   .close {

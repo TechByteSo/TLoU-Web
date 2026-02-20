@@ -134,9 +134,9 @@ body.page-exiting {
 /* Мобильные устройства */
 @media (max-width: 768px) {
   :root {
-    --intro-padding-top: clamp(70px, 10vh, 100px);
+    --intro-padding-top: clamp(70px, 10dvh, 100px);
     --intro-padding-bottom: var(--spacing-lg);
-    --intro-min-height: clamp(60vh, 70vh, 75vh);
+    --intro-min-height: clamp(60dvh, 70dvh, 75dvh);
     --intro-content-gap: calc(var(--spacing-lg) / 2);
     --container-margin-top: calc(var(--spacing-lg) / 2);
     --container-margin-bottom: calc(var(--spacing-lg) / 2);
@@ -149,9 +149,9 @@ body.page-exiting {
 /* Планшеты */
 @media (min-width: 769px) and (max-width: 1024px) {
   :root {
-    --intro-padding-top: clamp(60px, 3vh, 80px);
+    --intro-padding-top: clamp(60px, 3dvh, 80px);
     --intro-padding-bottom: var(--spacing-lg);
-    --intro-min-height: clamp(45vh, 50vh, 55vh);
+    --intro-min-height: clamp(45dvh, 50dvh, 55dvh);
     --intro-content-gap: var(--spacing-lg);
     --container-margin-top: calc(var(--spacing-md) / 2);
     --container-margin-bottom: calc(var(--spacing-md) / 2);

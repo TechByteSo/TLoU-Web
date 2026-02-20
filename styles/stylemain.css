@@ -13,6 +13,7 @@
   margin: 0;
   padding: var(--intro-padding-bottom) var(--spacing-container);
   padding-top: calc(var(--intro-padding-top) + var(--header-height) + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(var(--intro-padding-bottom) + env(safe-area-inset-bottom, 0px));
   background-image: url(../images/Background/Webp/The\ Last\ of\ Us\ Part\ 1\ intro.webp);
   background-repeat: no-repeat;
   background-size: cover;
@@ -246,7 +247,8 @@
   /* Маленькие телефоны: интро ниже header */
   @media (max-width: 390px) {
     .intro {
-      padding-top: calc(72px + 7vh + var(--spacing-lg) + env(safe-area-inset-top, 0px));
+      padding-top: calc(72px + 7dvh + var(--spacing-lg) + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
     }
   }
   
@@ -254,8 +256,8 @@
   @media (max-height: 700px) {
     .intro {
       min-height: auto;
-      padding-top: calc(70px + 6vh + var(--spacing-lg) + env(safe-area-inset-top, 0px));
-      padding-bottom: var(--spacing-lg);
+      padding-top: calc(70px + 6dvh + var(--spacing-lg) + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
       justify-content: flex-start;
     }
     .intro-content {
@@ -302,7 +304,7 @@
   .imageR img {
     width: 100% !important;
     height: auto !important;
-    max-height: clamp(300px, 40vh, 400px) !important;
+    max-height: clamp(300px, 40dvh, 400px) !important;
     margin: 0 !important;
     padding: 0 !important;
     object-fit: contain !important;
@@ -401,9 +403,9 @@
 @media (min-width: 769px) and (max-width: 1024px) {
   .intro {
     padding: var(--spacing-lg) var(--spacing-lg);
-    padding-top: calc(60px + 2.5vh + var(--spacing-sm) + env(safe-area-inset-top, 0px));
-    padding-bottom: var(--spacing-lg);
-    min-height: 46vh;
+    padding-top: calc(60px + 2.5dvh + var(--spacing-sm) + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
+    min-height: 46dvh;
     background-position: 60% center;
     background-attachment: scroll;
   }
@@ -411,16 +413,18 @@
   /* Портретная ориентация планшетов */
   @media (orientation: portrait) {
     .intro {
-      min-height: clamp(40vh, 50vh, 55vh);
-      padding-top: calc(60px + 2vh + var(--spacing-sm) + env(safe-area-inset-top, 0px));
+      min-height: clamp(40dvh, 50dvh, 55dvh);
+      padding-top: calc(60px + 2dvh + var(--spacing-sm) + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
     }
   }
   
   /* Альбомная ориентация планшетов */
   @media (orientation: landscape) {
     .intro {
-      min-height: clamp(50vh, 60vh, 65vh);
-      padding-top: calc(60px + 3vh + var(--spacing-md) + env(safe-area-inset-top, 0px));
+      min-height: clamp(50dvh, 60dvh, 65dvh);
+      padding-top: calc(60px + 3dvh + var(--spacing-md) + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
     }
   }
   

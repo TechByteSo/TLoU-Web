@@ -372,7 +372,7 @@
     width: 98%;
     padding: var(--spacing-md);
     margin: 1% auto;
-    max-height: 95vh;
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 20px);
   }
 }
 
@@ -487,6 +487,7 @@
     align-items: center;
     justify-content: center;
     padding: var(--spacing-lg);
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
   }
   
   #screenshotModal .modal-content {
@@ -494,7 +495,16 @@
     width: 95%;
     max-width: 900px;
     padding-top: var(--spacing-md);
-    padding-bottom: var(--spacing-md);
+    padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 40px);
+  }
+  
+  #screenshotModal .modal-body {
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 120px);
+  }
+  
+  #screenshotModal .slider-container {
+    max-height: calc(90dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 120px);
   }
   
   /* Анимация смены изображений на планшетах */
@@ -527,7 +537,8 @@
     width: 100%;
     max-width: 100%;
     padding: var(--spacing-md);
-    max-height: 95vh;
+    padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     display: inline-block;
     position: relative;
     border-radius: 0;
@@ -540,6 +551,7 @@
     position: relative;
     width: auto;
     height: auto;
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 100px);
     overflow: visible;
   }
   
@@ -549,7 +561,7 @@
     width: auto;
     height: auto;
     min-height: 0;
-    max-height: 85vh;
+    max-height: calc(85dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     display: block;
     overflow: visible;
     position: relative;
@@ -592,7 +604,7 @@
     width: auto;
     height: auto;
     max-width: 90vw;
-    max-height: 85vh;
+    max-height: calc(85dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     object-fit: contain;
     display: block;
     margin: 0;
@@ -641,17 +653,18 @@
     width: 100%;
     margin: 0;
     border-radius: 0;
-    max-height: 100vh;
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     padding: var(--spacing-sm);
+    padding-bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom, 0px));
   }
   
   .modal-body {
-    max-height: calc(100vh - 80px);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 80px);
   }
   
   .slider-container {
-    min-height: 50vh;
-    max-height: calc(100vh - 80px);
+    min-height: 50dvh;
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 80px);
   }
   
   .nav-btn {
