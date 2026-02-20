@@ -142,7 +142,8 @@ body.page-exiting {
     --container-margin-bottom: calc(var(--spacing-lg) / 2);
     --container-padding-x: var(--spacing-container);
     --container-gap: var(--spacing-md);
-    --header-height: 50px;
+    /* Высота фиксированного хедера: padding + логотип (с запасом под safe-area) */
+    --header-height: 56px;
   }
 }
 

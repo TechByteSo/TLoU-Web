@@ -236,6 +236,8 @@
   .intro {
     background-attachment: scroll;
     background-position: 60% center;
+    /* Гарантируем отступ под фиксированный header на мобильных */
+    padding-top: calc(var(--intro-padding-top) + var(--header-height) + env(safe-area-inset-top, 0px)) !important;
   }
   
   .intro-content {
@@ -244,10 +246,10 @@
     justify-content: center;
   }
   
-  /* Маленькие телефоны: интро ниже header */
+  /* Маленькие телефоны: интро ниже header (с учётом высоты хедера) */
   @media (max-width: 390px) {
     .intro {
-      padding-top: calc(72px + 7dvh + var(--spacing-lg) + env(safe-area-inset-top, 0px));
+      padding-top: calc(72px + 7dvh + var(--header-height) + var(--spacing-lg) + env(safe-area-inset-top, 0px)) !important;
       padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
     }
   }
@@ -256,7 +258,7 @@
   @media (max-height: 700px) {
     .intro {
       min-height: auto;
-      padding-top: calc(70px + 6dvh + var(--spacing-lg) + env(safe-area-inset-top, 0px));
+      padding-top: calc(70px + 6dvh + var(--header-height) + var(--spacing-lg) + env(safe-area-inset-top, 0px)) !important;
       padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom, 0px));
       justify-content: flex-start;
     }
