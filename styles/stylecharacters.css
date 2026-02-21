@@ -62,6 +62,13 @@
   transform: translateY(0);
 }
 
+/* Десктоп: отступ снизу у блока карточек, чтобы не прилипали к футеру */
+@media (min-width: 1025px) {
+  .characters-container {
+    margin-bottom: var(--spacing-2xl);
+  }
+}
+
 /* ================= КАРТОЧКИ ПЕРСОНАЖЕЙ ================= */
 .character-card {
   width: 100%;
